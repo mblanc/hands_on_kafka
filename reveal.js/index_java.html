@@ -1073,9 +1073,9 @@ private static void process(KafkaConsumer&lt;String, String&gt; consumer) {
     ConsumerRecords&lt;String, String&gt; records = consumer.poll(1000);
     while (!records.isEmpty()) {
         for (ConsumerRecord&lt;String, String&gt; record : records) {
-        System.out.printf("topic = %s, partition = %s, offset = %d, customer = %s, country =%s%n",
-        record.topic(), record.partition(), record.offset(), record.key(), record.value());
-    }
+            System.out.println(String.format("topic = %s, partition: %d, offset: %d: %s", record.topic(), record.partition(),
+            record.offset(), record.value()));
+        }
         records = consumer.poll(1000);
     }
 }</code></pre>

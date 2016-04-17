@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class BatchConsumer {
+public class JavaBatchConsumer {
 
     public static void main(String[] args) {
         KafkaConsumer<String, String> consumer = createKafkaConsumer();
@@ -59,8 +59,8 @@ public class BatchConsumer {
         ConsumerRecords<String, String> records = consumer.poll(1000);
         while (!records.isEmpty()) {
             for (ConsumerRecord<String, String> record : records) {
-                System.out.printf("topic = %s, partition = %s, offset = %d, customer = %s, country =%s%n",
-                        record.topic(), record.partition(), record.offset(), record.key(), record.value());
+                System.out.println(String.format("topic = %s, partition: %d, offset: %d: %s", record.topic(), record.partition(),
+                        record.offset(), record.value()));
             }
             records = consumer.poll(1000);
         }

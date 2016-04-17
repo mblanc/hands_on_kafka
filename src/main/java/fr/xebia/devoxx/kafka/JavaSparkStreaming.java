@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class JavaConsumerSparkStreaming {
+public class JavaSparkStreaming {
 
     public static void main(String[] args) {
         JavaStreamingContext context = createStreamContext();
@@ -23,7 +23,7 @@ public class JavaConsumerSparkStreaming {
 
         // TODO Step 6_3
         stream.map(v1 -> extractValueFromRecord(v1._2()))
-            .foreachRDD(JavaConsumerSparkStreaming::displayAvg);
+            .foreachRDD(JavaSparkStreaming::displayAvg);
 
         context.start();
         context.awaitTermination();

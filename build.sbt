@@ -1,11 +1,9 @@
-val kafkaVersion = "0.8.2.0"
+libraryDependencies += "org.apache.kafka" % "kafka-clients" % "0.9.0.0"
 
-val zookeeperVersion = "3.4.6"
+libraryDependencies += "org.apache.kafka" % "kafka-streams" % "0.9.0.0"
 
-libraryDependencies += "org.apache.kafka" %% "kafka" % kafkaVersion exclude("javax.jms", "jms") exclude("com.sun.jmx", "jmxri") exclude("com.sun.jdmk", "jmxtools") withSources()
+libraryDependencies += "org.apache.spark" % "spark-streaming" %% "1.6.1"
 
-libraryDependencies += "org.apache.kafka" % "kafka-clients" % kafkaVersion exclude("javax.jms", "jms") exclude("com.sun.jmx", "jmxri") exclude("com.sun.jdmk", "jmxtools") withSources()
-
-libraryDependencies += "org.apache.zookeeper" % "zookeeper" % zookeeperVersion withSources()
+libraryDependencies += "org.apache.spark" % "spark-streaming-kafka" %% "1.6.1"
 
 retrieveManaged := true

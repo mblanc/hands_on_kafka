@@ -3,7 +3,7 @@ package fr.xebia.devoxx.kafka
 import java.util.Properties
 
 import org.apache.kafka.common.serialization.{StringDeserializer, StringSerializer}
-import org.apache.kafka.streams.kstream.{KStream, KStreamBuilder}
+import org.apache.kafka.streams.kstream.{KeyValueMapper, KStream, KStreamBuilder}
 import org.apache.kafka.streams.{KafkaStreams, KeyValue, StreamsConfig}
 
 object ScalaKStream {
@@ -19,7 +19,9 @@ object ScalaKStream {
 
     // TODO 5_3 : Create a new sink KStream from the source KStream with the map method : send new KeyValue message, prepend "STREAM : " to the value of the message
     val sink: KStream[String, String] = source.map {
-      case (key, value) => new KeyValue[String, String](key, "STREAM : " + value)
+      new KeyValueMapper[String, String, KeyValue[String, String]] {
+        override def apply(key: String, value: String): KeyValue[String, String] = new KeyValue[String, String](key, "STREAM : " + value)
+      }
     }
 
     // TODO 5_4 : Send the message from the sink KStream to the Kafka topic devoxx-streams-out

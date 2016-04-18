@@ -1,1518 +1,1462 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="utf-8">
+<head>
+    <meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+    <title>reveal.js - The HTML Presentation Framework</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/league.css" id="theme">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/league.css" id="theme">
 
-		<!-- Code syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
 
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
 
-	<body>
+<body>
 
-		<div class="reveal">
+<div class="reveal">
 
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
-				<section data-background="img/u7EGEeEmpR43e.gif">
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-					<h1>Hands on Kafka</h1>
-                    <h3>Devoxx 2016</h3>
-				</section>
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section data-background="img/u7EGEeEmpR43e.gif">
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <h1>Hands on Kafka</h1>
+            <h3>Devoxx 2016</h3>
+        </section>
 
-				<section>
-					<h2>Infrastructure</h2>
-					<section data-background="img/lIk6BF7Vj9XcA.gif">
-						<p>Préparons nous</p>
-					</section>
-					<section>
-						<p>Copier l'install de Kafka sur votre machine depuis la clé fournie.</p>
-					</section>
-					<section>
-						<p>Par la suite, les commandes exécutées supposent que vous êtes avec un terminal dans ce répertoire.</p>
-					</section>
-					<section>
-						<p>Pensez à démarrer 5 à 6 sessions de terminal dans ce répertoire.</p>
-					</section>
-				</section>
+        <section>
+            <h2>Infrastructure</h2>
+            <section data-background="img/lIk6BF7Vj9XcA.gif">
+                <p>Préparons nous</p>
+            </section>
+            <section>
+                <p>Copier l'install de Kafka sur votre machine depuis la clé fournie.</p>
+            </section>
+            <section>
+                <p>Par la suite, les commandes exécutées supposent que vous êtes avec un terminal dans ce répertoire.</p>
+            </section>
+            <section>
+                <p>Pensez à démarrer 5 à 6 sessions de terminal dans ce répertoire.</p>
+            </section>
+        </section>
 
-				<section>
-					<h2>Zookeeper</h2>
-                    <section data-background="http://metrouk2.files.wordpress.com/2011/03/article-1299702341820-0057fc54000004b0-402932_636x389.jpg"></section>
-					<section>
-						<p>Zookeeper sert à la coordination de Kafka.</p>
-					</section>
-					<section>
-						<p>Il faut donc le démarrer en premier.</p>
-						<p>Pour les besoins de l'atelier, un seul noeud suffit.</p>
-					</section>
-					<section>
-						<h3>Démarrons 1 noeud Zookeeper</h3>
-						<pre><code class="hljs" data-trim>./bin/zookeeper-server-start.sh config/zookeeper.properties</code></pre>
-					</section>
-					<section>
-						<h3>Testons</h3>
+        <section>
+            <h2>Zookeeper</h2>
+            <section data-background="http://metrouk2.files.wordpress.com/2011/03/article-1299702341820-0057fc54000004b0-402932_636x389.jpg"></section>
+            <section>
+                <p>Zookeeper sert à la coordination de Kafka.</p>
+            </section>
+            <section>
+                <p>Il faut donc le démarrer en premier.</p>
+                <p>Pour les besoins de l'atelier, un seul noeud suffit.</p>
+            </section>
+            <section>
+                <h3>Démarrons 1 noeud Zookeeper</h3>
+                <pre><code class="hljs" data-trim>./bin/zookeeper-server-start.sh config/zookeeper.properties</code></pre>
+            </section>
+            <section>
+                <h3>Testons</h3>
 						<pre><code class="hljs" data-trim>
-telnet 127.0.0.1 2181
+                            telnet 127.0.0.1 2181
 
-Trying 127.0.0.1...
-Connected to localhost.
-Escape character is '^]'.
-						</code></pre>
-					</section>					
-				</section>
-
-				<section>
-					<h2 style="color: #0d99a5">Kafka</h2>
-                    <section data-background="https://alyoop2.files.wordpress.com/2015/01/kafka-bug.jpg">
-                    </section>
-					<section>
-						<p>Ce sont ces noeuds qui vont gérer le stockage des messages et leur distribution.</p>
-					</section>
-					<section>
-						<h3>Modification de la configuration du serveur</h3>
-						<pre><code class="hljs" data-trim>						
-//Changez la configuration par défaut avec 4 partitions
-vi config/server.properties
-...
-num.partitions=4
-...
-						</code></pre>
-					</section>
-					<section>
-						<h3>Création de deux fichiers de configuration</h3>
-						<pre><code class="hljs" data-trim>
-//Copiez le fichier dans deux fichiers séparés, un par broker
-cp config/server.properties config/server-1.properties
-cp config/server.properties config/server-2.properties
-						</code></pre>
-					</section>
-					<section>
-						<h3>Configuration du noeud 1</h3>
-						<p>server-1.properties</p>
-						<pre><code class="hljs" data-trim>
-// Éditez le fichier config/server-1.properties pour changer son id,
-// son port et son répertoire de travail
-vi config/server-1.properties
-...
-broker.id=1
-...
-listeners=PLAINTEXT://:9092
-...
-log.dirs=/tmp/kafka-logs-1
-...
-zookeeper.connect=localhost:2181
-...
-						</code></pre>
-					</section>
-					<section>
-						<h3>Configuration du noeud 2</h3>
-						<p>server-2.properties</p>
-						<pre><code class="hljs" data-trim>
-//Éditez le fichier config/server-2.properties pour changer son id,
-//son port et son répertoire de travail
-vi config/server-2.properties
-...
-broker.id=2
-...
-listeners=PLAINTEXT://:9093
-...
-log.dirs=/tmp/kafka-logs-2
-...
-zookeeper.connect=localhost:2181
-...
-						</code></pre>
-					</section>
-					<section>
-						<h3>Démarrons les deux noeuds</h3>
-						<pre><code class="hljs" data-trim>
-//Broker 1
-//Lancez le noeud
-./bin/kafka-server-start.sh config/server-1.properties
-							
-...
-
-//Broker 2
-//Lancez le noeud
-./bin/kafka-server-start.sh config/server-2.properties
-						</code></pre>
-					</section>
-					<section>
-						<h3>Testons</h3>
-						<pre><code class="hljs" data-trim>
-//Connectez vous à Zookeper
-./bin/zookeeper-shell.sh 127.0.0.1:2181
-
-//Vérifiez les ids des brokers
-ls /brokers/ids
-
-//Vérifiez le port du broker1
-get /brokers/ids/1
-
-//Vérifiez le port du broker2
-get /brokers/ids/2
-						</code></pre>
-					</section>
-				</section>
-
-				<section>
-					<h2>Kafka CLI</h2>
-                    <section data-background="https://i.imgur.com/hw9cmbg.png"></section>
-					<section>
-						<p>Nous allons créer un topic pour cet atelier. Il sera répliqué deux fois avec 4 partitions.</p>
-					</section>
-					<section>
-						<h3>Création du topic 'devoxx'</h3>
-						<pre><code class="hljs" data-trim>
-./bin/kafka-topics.sh --create --topic devoxx \
---partition 4 --replication-factor 2 --zookeeper 127.0.0.1:2181
-						</code></pre>
-					</section>
-					<section>
-						<p>Vous remarquerez que nous ne discutons pas directement avec Kafka mais seulement avec Zookeeper.</p>
-						<p>Kafka est par nature distribué, chaque broker surveille Zookeeper. L'ensemble se coordonne ensuite pour avec un état cohérent.</p>
-					</section>
-					<section>
-						<h3>Vérification</h3>
-						<pre><code class="hljs" data-trim>
-./bin/kafka-topics.sh --describe  --topic devoxx --zookeeper 127.0.0.1:2181
-
-Topic:devoxx  PartitionCount:4  ReplicationFactor:2 Configs:
-  Topic: devoxx	Partition: 0  Leader: 1	Replicas: 1,2  Isr: 1,2
-  Topic: devoxx	Partition: 1  Leader: 2	Replicas: 2,1  Isr: 2,1
-  Topic: devoxx	Partition: 2  Leader: 1	Replicas: 1,2  Isr: 1,2
-  Topic: devoxx	Partition: 3  Leader: 2	Replicas: 2,1  Isr: 2,1
-						</code></pre>
-						<p>Dans ce cas, les partitions 0 et 2 sont gérées par le broker 1, 1 et 3 par le broker 2.</p>
-						<p>Toutes les partitions ont des replicas "In sync" dans les deux brokers.</p>
-					</section>
-					<section>
-						<h3>Lancement d'un consommateur</h3>
-						<pre><code class="hljs" data-trim>
-./bin/kafka-console-consumer.sh --topic devoxx --zookeeper 127.0.0.1:2181
-						</code></pre>
-						<p>Rien ne se passe pour l'instant car il n'y a pas de production de données.</p>
-					</section>
-                    <section>
-                        <h3>Lancement d'un producteur</h3>
-						<pre><code class="hljs" data-trim>
-./bin/kafka-console-producer.sh --topic devoxx --broker-list 127.0.0.1:9092,127.0.0.1:9093
+                            Trying 127.0.0.1...
+                            Connected to localhost.
+                            Escape character is '^]'.
                         </code></pre>
-                        <p>Vous remarquerez cette fois que nous avons donné en paramètre la liste des brokers et pas de zookeeper.</p>
-                    </section>
-                    <section>
-                        <p>Saississez des messages séparés par ENTER. Ils doivent apparaître dans la session du consommateur.</p>
-                    </section>
-                    <section>
-                        <h3>Stockage des données</h3>
-                        <pre><code class="hljs" data-trim>
-ls -l /tmp/kafka-logs-1 /tmp/kafka-logs-2
-                            
-/tmp/kafka-logs-1:
-total 16
-.
-..
-devoxx-0
-devoxx-1
-devoxx-2
-devoxx-3
+            </section>
+        </section>
 
-/tmp/kafka-logs-2:
-total 16
-.
-..
-devoxx-0
-devoxx-1
-devoxx-2
-devoxx-3
+        <section>
+            <h2 style="color: #0d99a5">Kafka</h2>
+            <section data-background="https://alyoop2.files.wordpress.com/2015/01/kafka-bug.jpg">
+            </section>
+            <section>
+                <p>Ce sont ces noeuds qui vont gérer le stockage des messages et leur distribution.</p>
+            </section>
+            <section>
+                <h3>Modification de la configuration du serveur</h3>
+						<pre><code class="hljs" data-trim>
+                            //Changez la configuration par défaut avec 4 partitions
+                            vi config/server.properties
+                            ...
+                            num.partitions=4
+                            ...
                         </code></pre>
-                    </section>
-                    <section>
-                        <h3>Stockage des données</h3>
-                        <pre><code class="hljs" data-trim>
-ls -l /tmp/kafka-logs-*/devoxx-*/*
-                            
-/tmp/kafka-logs-1/devoxx-1/00000000000000000000.index
-/tmp/kafka-logs-1/devoxx-1/00000000000000000000.log
-/tmp/kafka-logs-1/devoxx-3/00000000000000000000.index
-/tmp/kafka-logs-1/devoxx-3/00000000000000000000.log
-/tmp/kafka-logs-2/devoxx-0/00000000000000000000.index
-/tmp/kafka-logs-2/devoxx-0/00000000000000000000.log
-/tmp/kafka-logs-2/devoxx-2/00000000000000000000.index
-/tmp/kafka-logs-2/devoxx-2/00000000000000000000.log
+            </section>
+            <section>
+                <h3>Création de deux fichiers de configuration</h3>
+						<pre><code class="hljs" data-trim>
+                            //Copiez le fichier dans deux fichiers séparés, un par broker
+                            cp config/server.properties config/server-1.properties
+                            cp config/server.properties config/server-2.properties
                         </code></pre>
-                        <p>Dans chaque partition, un fichier a été créé pour indexer les données et les stocker.</p>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>
-cat /tmp/kafka-logs-*/devoxx-*/*.log
-p_N����Bonjour devoxxp_N����Bonjour devoxxp_N����Bonjour devoxx�������phae�[^<����ahize%
+            </section>
+            <section>
+                <h3>Configuration du noeud 1</h3>
+                <p>server-1.properties</p>
+						<pre><code class="hljs" data-trim>
+                            // Éditez le fichier config/server-1.properties pour changer son id,
+                            // son port et son répertoire de travail
+                            vi config/server-1.properties
+                            ...
+                            broker.id=1
+                            ...
+                            listeners=PLAINTEXT://:9092
+                            ...
+                            log.dirs=/tmp/kafka-logs-1
+                            ...
+                            zookeeper.connect=localhost:2181
+                            ...
                         </code></pre>
-                        <p>Enfin, à l'intérieur des fichiers .log (segments) se trouvent les messages.</p>
-                    </section>
-				</section>
-                
-                <section>
-                    <h2>STEP_1</h2>
-                    <h3>Codons un producteur</h3>
-                    <section data-background="http://i.giphy.com/ZPFQVis9WAAcE.gif"></section>
-                    <section>
-                        <p>Nous allons maintenant créer un producteur de données avec du code et l'API 0.9.1.X de Kafka.</p>
-                    </section>
-                    <section>
-                        <p>Écrire dans Kafka consiste à :
-                            <ol>
-                            <li>Configurer et instancier un <i>KafkaProducer</i></li>
-                            <li>Créer des messages de type <i>ProducerRecord</i></li>
-                            <li>Les envoyer à l'aide du <i>KafkaProducer</i> dans le topic Kafka</li>
-                            </ol>
-                        </p>
-                    </section>
-                    <section>
-                        <p>Pour se faire, vous allez devoir suivre les 4 TODOs de la classes <i>fr.xebia.devoxx.kafka.JavaProducer</i> en suivant les étapes décrites si dessous.</p>
-                        <p>Cette classe est une classe exécutable que vous pouvez lancer depuis Eclipse ou IntelliJ.</p>
-                    </section>
-                </section>
-                
-                
-                <section data-background-video="http://i.imgur.com/zNJ4r1g.gifv">
-                    <h2>STEP_1_1</h2>
-                    <h3>Instanciation d'un KafkaProducer</h3>
-                    <section></section>
-                    <section>
-                        <p>Instancier un <i>org.apache.kafka.clients.producer.KafkaProducer&lt;K, V&gt;</i> dans la méthode <i>createKafkaProducer</i>.</p>
-                    </section>
-                    <section>
-                        <p>Un producer a besoin d'une Map de propriétés</p>
-                    </section>
-                    <section>
-                        <p>Les 3 propriétés obligatoires sont : </p>
-                    </section>
-                    <section>
-                        <p><i>bootstrap.servers</i></p>
-                        <p>Liste de host:port, séparés par des virgules, pour se connecter aux brokers Kafka. Pas besoin, de mettre la liste complète des brokers. Néanmoins c'est une bonne pratique d'en mettre au moins deux pour que votre producer soit tolérant à la panne d'un broker.</p>
-                    </section>
-                    <section>                        
-                        <p><i>key.serializer</i> / <i>value.serializer</i></p>
-                        <p>Les brokers Kafka manipulent les clés et valeurs des messages sous forme de byte arrays.</p>
-                        <p>Mettre comme valeur le nom complet d'un classe qui implémente l'interface <i>org.apache.kafka.common.serialization.Serializer</i>.<p>
-                    </section>
-                    <section>
-                        <p>Le producer utilisera cette classe pour "serialiser" les objets java des clés et valeurs des messages sous forme de byte arrays.</p>
-                        <p>Dans cet exercice nous manipulerons des messages avec des clés et des valeurs de types String.</p>
-                        <p>N.B. : key.serializer est obligatoire même si on envoie des messages sans clés.</p>
-                    </section>
-                    <section>
-                        <h4>Implémentez la section 1_1</h4>
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>
-Map&lt;String, Object&gt; props = new HashMap&lt;&gt;();
-props.put("bootstrap.servers", "localhost:9092,localhost:9093");
-props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+            </section>
+            <section>
+                <h3>Configuration du noeud 2</h3>
+                <p>server-2.properties</p>
+						<pre><code class="hljs" data-trim>
+                            //Éditez le fichier config/server-2.properties pour changer son id,
+                            //son port et son répertoire de travail
+                            vi config/server-2.properties
+                            ...
+                            broker.id=2
+                            ...
+                            listeners=PLAINTEXT://:9093
+                            ...
+                            log.dirs=/tmp/kafka-logs-2
+                            ...
+                            zookeeper.connect=localhost:2181
+                            ...
+                        </code></pre>
+            </section>
+            <section>
+                <h3>Démarrons les deux noeuds</h3>
+						<pre><code class="hljs" data-trim>
+                            //Broker 1
+                            //Lancez le noeud
+                            ./bin/kafka-server-start.sh config/server-1.properties
 
-return new KafkaProducer&lt;&gt;(props);
+                            ...
+
+                            //Broker 2
+                            //Lancez le noeud
+                            ./bin/kafka-server-start.sh config/server-2.properties
                         </code></pre>
-                    </section>
-                </section>
-                
-                
-                <section>
-                    <h2>STEP_1_2</h2>
-                    <h3>Écriture dans le topic</h3>
-                    <section></section>
-                    <section>
-                        <p>Explorez l'API de <i>KafkaProducer</i> et <i>ProducerRecord</i> et envoyez un message (<i>ProducerRecord&lt;K, V&gt;</i>) sur le topic <i>devoxx</i>.</p>
-                    </section>
-                    <section>
-                        <p>Vous trouverez une méthode <i>produceData</i> qui produit un message avec le timestamp + la charge moyenne de votre machine.</p>
-                    </section>
-                    <section>
-                        <p>Dans la boucle infinie de la méthode <i>main</i> du JavaProducer : créer un <i>ProducerRecord&lt;String, String&gt;</i> possédant uniquement une valeur (pas de clé) générée à l'aide de la méthode <i>produceData</i></p>
-                        <p>Appeler ensuite la méthode <i>fireAndForget</i> en passant en paramètres le <i>KafkaProducer</i> et le <i>ProducerRecord</i>.</p>
-                    </section>
-                    <section>
-                        <p>Dans la méthode <i>fireAndForget</i> du JavaProducer : envoyer le message aux brokers Kafka de manière asynchrone et sans callback.</p>
-                    </section>
-                    <section>
-                        <h4>Implémentez la section 1_2</h4>
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>
-public static void main(String[] args) throws ExecutionException, InterruptedException {
-    // instanciation du KafkaProducer
-    KafkaProducer&lt;String, String&gt; producer = createKafkaProducer();
+            </section>
+            <section>
+                <h3>Testons</h3>
+						<pre><code class="hljs" data-trim>
+                            //Connectez vous à Zookeper
+                            ./bin/zookeeper-shell.sh 127.0.0.1:2181
 
-    // écriture
-    while (true) {
-        // TODO 1_2
-        String message = produceData();
-        ProducerRecord&lt;String, String&gt; record = new ProducerRecord<>("devoxx", message);
-        fireAndForget(producer, record);
-        Thread.sleep(1000);
-    }
-}</code></pre>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>
-private static void fireAndForget(KafkaProducer&lt;String, String&gt; producer, ProducerRecord&lt;String, String&gt; record) {
-    // TODO 1_2
-    try {
-        producer.send(record);
-    } catch (Exception e) {
-        // only catch exception before sending message
-        e.printStackTrace();
-    }
-}</code></pre>
-                    </section>
-                    <section>
-                        <p>Vous pouvez lancer la classe JavaProducer</p>
-                    </section>
-                    <section>
-                        <p>Vérifier que le kafka-console-consumer lancé dans l'exercice précédent reçoit bien les messages envoyés par notre JavaProducer</p>
-                        <pre><code class="hljs" data-trim>
-2015-10-20T16:11:17.412Z: avg_load: 2.81005859375
-2015-10-20T16:11:18.934Z: avg_load: 2.81005859375
-2015-10-20T16:11:19.939Z: avg_load: 2.81005859375
-2015-10-20T16:11:20.946Z: avg_load: 2.6650390625
-2015-10-20T16:11:21.951Z: avg_load: 2.6650390625
+                            //Vérifiez les ids des brokers
+                            ls /brokers/ids
+
+                            //Vérifiez le port du broker1
+                            get /brokers/ids/1
+
+                            //Vérifiez le port du broker2
+                            get /brokers/ids/2
                         </code></pre>
-                    </section>
-                    <section>
-                        <p>Dans la boucle infinie de la méthode <i>main</i>, <i>Thread.sleep(1000)</i> est juste là pour ne pas saturer le système. Essayer de changer sa valeur pour voir la différence sur la charge sur votre système.</p>
-                    </section>
-                </section>
+            </section>
+        </section>
 
-                <section>
-                    <h2>STEP_1_3</h2>
-                    <h3>Écriture synchrone</h3>
-                    <section></section>
-                    <section>
-                        <p>La méthode send du <i>KafkaProducer</i> renvoit une Future</p>
-                    </section>
-                    <section>
-                        <p>Dans la boucle infinie de la méthode <i>main</i> du JavaProducer : Modifier l'appel à <i>fireAndForget</i> par un appel à <i>sendSynchronously</i></p>
-                    </section>
-                    <section>
-                        <p>Dans la méthode <i>sendSynchronously</i> du JavaProducer : envoyer le message aux brokers Kafka de manière synchrone en bloquant sur la future à l'aide de la méthode <i>get()</i>.</p>
-                    </section>
-                    <section>
-                        <h4>Implémentez la section 1_3</h4>
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>
-private static void sendSynchronously(KafkaProducer&lt;String, String&gt; producer, ProducerRecord&lt;String, String&gt; record) {
-    // TODO 1_3
-    try {
-        producer.send(record).get();
-    } catch (Exception e) {
-        // catch all exceptions
-        e.printStackTrace();
-    }
-}</code></pre>
-                    </section>
-                </section>
+        <section>
+            <h2>Kafka CLI</h2>
+            <section data-background="https://i.imgur.com/hw9cmbg.png"></section>
+            <section>
+                <p>Nous allons créer un topic pour cet atelier. Il sera répliqué deux fois avec 4 partitions.</p>
+            </section>
+            <section>
+                <h3>Création du topic 'devoxx'</h3>
+						<pre><code class="hljs" data-trim>
+                            ./bin/kafka-topics.sh --create --topic devoxx \
+                            --partition 4 --replication-factor 2 --zookeeper 127.0.0.1:2181
+                        </code></pre>
+            </section>
+            <section>
+                <p>Vous remarquerez que nous ne discutons pas directement avec Kafka mais seulement avec Zookeeper.</p>
+                <p>Kafka est par nature distribué, chaque broker surveille Zookeeper. L'ensemble se coordonne ensuite pour avec un état cohérent.</p>
+            </section>
+            <section>
+                <h3>Vérification</h3>
+						<pre><code class="hljs" data-trim>
+                            ./bin/kafka-topics.sh --describe  --topic devoxx --zookeeper 127.0.0.1:2181
 
-                <section>
-                    <h2>STEP_1_4</h2>
-                    <h3>Écriture asynchrone</h3>
-                    <section></section>
-                    <section>
-                        <p>Il est possible d'envoyer des messages auxx brokers Kafka de manière asynchrone et d'impléménter une méthode de callback qui sera appelée lorsque les brokers Kafka se seront acquitté de l'écriture du message.</p>
-                    </section>
-                    <section>
-                        <p>Dans la boucle infinie de la méthode <i>main</i> du <i>JavaProducer</i> : Modifier l'appel à <i>sendSynchronously</i> par un appel à <i>sendAsynchronously</i></p>
-                    </section>
-                    <section>
-                        <p>Ecrire une classe <i>DemoProducerCallback</i> qui implémente l'interface <i>org.apache.kafka.clients.producer.Callback</i>.</p>
-                    </section>
-                    <section>
-                        <p>Dans cette classe vous devrez implémenter la méthode <i>onCompletion</i> qui possède deux arguments : </p>
-                        <p><i>RecordMetadata recordMetadata</i> qui renvoie des informations sur le message en cas de succès</p>
-                        <p><i>Exception e</i> qui sera non null en cas d'erreur</p>
-                    </section>
-                    <section>
-                        <p>Afficher simplement la stacktrace en cas d'erreur</p>
-                        <p>Afficher dans la console les informations que vous jugerez pertinentes en cas de succès (offset, partition, topic...)</p>
-                    </section>
-                    <section>
-                        <p>Dans la méthode <i>sendAsynchronously</i> du <i>JavaProducer</i> : envoyer le message aux brokers Kafka de manière asynchrone en passant en paramètre une instance de <i>DemoProducerCallback</i>.</p>
-                    </section>
-                    <section>
-                        <h4>Implémentez la section 1_4</h4>
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
+                            Topic:devoxx  PartitionCount:4  ReplicationFactor:2 Configs:
+                            Topic: devoxx	Partition: 0  Leader: 1	Replicas: 1,2  Isr: 1,2
+                            Topic: devoxx	Partition: 1  Leader: 2	Replicas: 2,1  Isr: 2,1
+                            Topic: devoxx	Partition: 2  Leader: 1	Replicas: 1,2  Isr: 1,2
+                            Topic: devoxx	Partition: 3  Leader: 2	Replicas: 2,1  Isr: 2,1
+                        </code></pre>
+                <p>Dans ce cas, les partitions 0 et 2 sont gérées par le broker 1, 1 et 3 par le broker 2.</p>
+                <p>Toutes les partitions ont des replicas "In sync" dans les deux brokers.</p>
+            </section>
+            <section>
+                <h3>Lancement d'un consommateur</h3>
+						<pre><code class="hljs" data-trim>
+                            ./bin/kafka-console-consumer.sh --topic devoxx --zookeeper 127.0.0.1:2181
+                        </code></pre>
+                <p>Rien ne se passe pour l'instant car il n'y a pas de production de données.</p>
+            </section>
+            <section>
+                <h3>Lancement d'un producteur</h3>
+						<pre><code class="hljs" data-trim>
+                            ./bin/kafka-console-producer.sh --topic devoxx --broker-list 127.0.0.1:9092,127.0.0.1:9093
+                        </code></pre>
+                <p>Vous remarquerez cette fois que nous avons donné en paramètre la liste des brokers et pas de zookeeper.</p>
+            </section>
+            <section>
+                <p>Saississez des messages séparés par ENTER. Ils doivent apparaître dans la session du consommateur.</p>
+            </section>
+            <section>
+                <h3>Stockage des données</h3>
                         <pre><code class="hljs" data-trim>
-// TODO 1_4
-private static class DemoProducerCallback implements Callback {
-    @Override
-    public void onCompletion(RecordMetadata recordMetadata, Exception e) {
-        if (e != null) {
-            // catch message send
-            e.printStackTrace();
-        } else if (recordMetadata != null) {
-            System.out.printf("message %d sent to partition %d of topic %s%n",
-            recordMetadata.offset(), recordMetadata.partition(), recordMetadata.topic());
-        }
-    }
-}</code></pre>
-                    </section>
-                    <section>
+                            ls -l /tmp/kafka-logs-1 /tmp/kafka-logs-2
+
+                            /tmp/kafka-logs-1:
+                            total 16
+                            .
+                            ..
+                            devoxx-0
+                            devoxx-1
+                            devoxx-2
+                            devoxx-3
+
+                            /tmp/kafka-logs-2:
+                            total 16
+                            .
+                            ..
+                            devoxx-0
+                            devoxx-1
+                            devoxx-2
+                            devoxx-3
+                        </code></pre>
+            </section>
+            <section>
+                <h3>Stockage des données</h3>
                         <pre><code class="hljs" data-trim>
-private static void sendAsynchronously(KafkaProducer&lt;String, String&gt; producer, ProducerRecord&lt;String, String&gt; record) {
-    // TODO 1_4
-    try {
-        producer.send(record, new DemoProducerCallback());
-    } catch (Exception e) {
-        // only catch exception before sending message
-        e.printStackTrace();
-    }
-}</code></pre>
-                    </section>
-                    <section>
-                        <h4>OU</h4>
-                    </section>
-                    <section>
+                            ls -l /tmp/kafka-logs-*/devoxx-*/*
+
+                            /tmp/kafka-logs-1/devoxx-1/00000000000000000000.index
+                            /tmp/kafka-logs-1/devoxx-1/00000000000000000000.log
+                            /tmp/kafka-logs-1/devoxx-3/00000000000000000000.index
+                            /tmp/kafka-logs-1/devoxx-3/00000000000000000000.log
+                            /tmp/kafka-logs-2/devoxx-0/00000000000000000000.index
+                            /tmp/kafka-logs-2/devoxx-0/00000000000000000000.log
+                            /tmp/kafka-logs-2/devoxx-2/00000000000000000000.index
+                            /tmp/kafka-logs-2/devoxx-2/00000000000000000000.log
+                        </code></pre>
+                <p>Dans chaque partition, un fichier a été créé pour indexer les données et les stocker.</p>
+            </section>
+            <section>
                         <pre><code class="hljs" data-trim>
-private static void sendAsynchronously(KafkaProducer&lt;String, String&gt; producer, ProducerRecord&lt;String, String&gt; record) {
-    // TODO 1_4
-    producer.send(record,
-    (recordMetadata, e) -> {
-        if (e != null) {
-            e.printStackTrace();
-        } else {
-            System.out.printf("message %d sent to partition %d of topic %s%n",
-            recordMetadata.offset(), recordMetadata.partition(), recordMetadata.topic());
-        }
+                            cat /tmp/kafka-logs-*/devoxx-*/*.log
+                            p_N����Bonjour devoxxp_N����Bonjour devoxxp_N����Bonjour devoxx�������phae�[^<����ahize%
+                        </code></pre>
+                <p>Enfin, à l'intérieur des fichiers .log (segments) se trouvent les messages.</p>
+            </section>
+        </section>
+
+        <section>
+            <h2>STEP_1</h2>
+            <h3>Codons un producteur</h3>
+            <section data-background="http://i.giphy.com/ZPFQVis9WAAcE.gif"></section>
+            <section>
+                <p>Nous allons maintenant créer un producteur de données avec du code et l'API 0.9.1.X de Kafka.</p>
+            </section>
+            <section>
+                <p>Écrire dans Kafka consiste à :
+                <ol>
+                    <li>Configurer et instancier un <i>KafkaProducer</i></li>
+                    <li>Créer des messages de type <i>ProducerRecord</i></li>
+                    <li>Les envoyer à l'aide du <i>KafkaProducer</i> dans le topic Kafka</li>
+                </ol>
+                </p>
+            </section>
+            <section>
+                <p>Pour se faire, vous allez devoir suivre les 4 TODOs de la classes <i>fr.xebia.devoxx.kafka.ScalaProducer</i> en suivant les étapes décrites si dessous.</p>
+                <p>Cette classe est une classe exécutable que vous pouvez lancer depuis Eclipse ou IntelliJ.</p>
+            </section>
+        </section>
+
+
+        <section data-background-video="http://i.imgur.com/zNJ4r1g.gifv">
+            <h2>STEP_1_1</h2>
+            <h3>Instanciation d'un KafkaProducer</h3>
+            <section></section>
+            <section>
+                <p>Instancier un <i>org.apache.kafka.clients.producer.KafkaProducer[K, V]</i> dans la méthode <i>createKafkaProducer</i>.</p>
+            </section>
+            <section>
+                <p>Un producer a besoin d'une Map de propriétés</p>
+            </section>
+            <section>
+                <p>Les 3 propriétés obligatoires sont : </p>
+            </section>
+            <section>
+                <p><i>bootstrap.servers</i></p>
+                <p>Liste de host:port, séparés par des virgules, pour se connecter aux brokers Kafka. Pas besoin, de mettre la liste complète des brokers. Néanmoins c'est une bonne pratique d'en mettre au moins deux pour que votre producer soit tolérant à la panne d'un broker.</p>
+            </section>
+            <section>
+                <p><i>key.serializer</i> / <i>value.serializer</i></p>
+                <p>Les brokers Kafka manipulent les clés et valeurs des messages sous forme de byte arrays.</p>
+                <p>Mettre comme valeur le nom complet d'un classe qui implémente l'interface <i>org.apache.kafka.common.serialization.Serializer</i>.<p>
+            </section>
+            <section>
+                <p>Le producer utilisera cette classe pour "serialiser" les objets java des clés et valeurs des messages sous forme de byte arrays.</p>
+                <p>Dans cet exercice nous manipulerons des messages avec des clés et des valeurs de types String.</p>
+                <p>N.B. : key.serializer est obligatoire même si on envoie des messages sans clés.</p>
+            </section>
+            <section>
+                <h4>Implémentez la section 1_1</h4>
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                        <pre><code class="hljs" data-trim>
+                            private def createKafkaProducer(): KafkaProducer[String, String] = {
+                            import scala.collection.JavaConversions._
+                            val props = Map(
+                            "bootstrap.servers" -> "localhost:9092,localhost:9093",
+                            "value.serializer" -> "org.apache.kafka.common.serialization.StringSerializer",
+                            "key.serializer" -> "org.apache.kafka.common.serialization.StringSerializer"
+                            )
+                            new KafkaProducer[String, String](props)
+                            }</code></pre>
+            </section>
+        </section>
+
+
+        <section>
+            <h2>STEP_1_2</h2>
+            <h3>Écriture dans le topic</h3>
+            <section></section>
+            <section>
+                <p>Explorez l'API de <i>KafkaProducer</i> et <i>ProducerRecord</i> et envoyez un message (<i>ProducerRecord[K, V]</i>) sur le topic <i>devoxx</i>.</p>
+            </section>
+            <section>
+                <p>Vous trouverez une méthode <i>produceData</i> qui produit un message avec le timestamp + la charge moyenne de votre machine.</p>
+            </section>
+            <section>
+                <p>Dans la boucle infinie de la méthode <i>main</i> du ScalaProducer : créer un <i>ProducerRecord[String, String]</i> possédant uniquement une valeur (pas de clé) générée à l'aide de la méthode <i>produceData</i></p>
+                <p>Appeler ensuite la méthode <i>fireAndForget</i> en passant en paramètres le <i>KafkaProducer</i> et le <i>ProducerRecord</i>.</p>
+            </section>
+            <section>
+                <p>Dans la méthode <i>fireAndForget</i> du ScalaProducer : envoyer le message aux brokers Kafka de manière asynchrone et sans callback.</p>
+            </section>
+            <section>
+                <h4>Implémentez la section 1_2</h4>
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                        <pre><code class="hljs" data-trim>
+                            def main(args: Array[String]) {
+                            // instanciation du KafkaProducer
+                            val producer = createKafkaProducer()
+
+                            // écriture
+                            while (true) {
+                            val message: String = produceData()
+                            val record: ProducerRecord[String, String] = new ProducerRecord[String, String]("devoxx", message)
+                            fireAndForget(producer, record)
+                            Thread.sleep(1000)
+                            }
+                            }</code></pre>
+            </section>
+            <section>
+                        <pre><code class="hljs" data-trim>
+                            private def fireAndForget(producer: KafkaProducer[String, String], record: ProducerRecord[String, String]) {
+                            try {
+                            producer.send(record)
+                            } catch {
+                            case e: Exception =>
+                            // only catch exception before sending message
+                            e.printStackTrace()
+                            }
+                            }</code></pre>
+            </section>
+            <section>
+                <p>Vous pouvez lancer la classe ScalaProducer</p>
+            </section>
+            <section>
+                <p>Vérifier que le kafka-console-consumer lancé dans l'exercice précédent reçoit bien les messages envoyés par notre ScalaProducer</p>
+                        <pre><code class="hljs" data-trim>
+                            2015-10-20T16:11:17.412Z: avg_load: 2.81005859375
+                            2015-10-20T16:11:18.934Z: avg_load: 2.81005859375
+                            2015-10-20T16:11:19.939Z: avg_load: 2.81005859375
+                            2015-10-20T16:11:20.946Z: avg_load: 2.6650390625
+                            2015-10-20T16:11:21.951Z: avg_load: 2.6650390625
+                        </code></pre>
+            </section>
+            <section>
+                <p>Dans la boucle infinie de la méthode <i>main</i>, <i>Thread.sleep(1000)</i> est juste là pour ne pas saturer le système. Essayer de changer sa valeur pour voir la différence sur la charge sur votre système.</p>
+            </section>
+        </section>
+
+        <section>
+            <h2>STEP_1_3</h2>
+            <h3>Écriture synchrone</h3>
+            <section></section>
+            <section>
+                <p>La méthode send du <i>KafkaProducer</i> renvoit une Future</p>
+            </section>
+            <section>
+                <p>Dans la boucle infinie de la méthode <i>main</i> du ScalaProducer : Modifier l'appel à <i>fireAndForget</i> par un appel à <i>sendSynchronously</i></p>
+            </section>
+            <section>
+                <p>Dans la méthode <i>sendSynchronously</i> du ScalaProducer : envoyer le message aux brokers Kafka de manière synchrone en bloquant sur la future à l'aide de la méthode <i>get()</i>.</p>
+            </section>
+            <section>
+                <h4>Implémentez la section 1_3</h4>
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                        <pre><code class="hljs" data-trim>
+                            private def sendSynchronously(producer: KafkaProducer[String, String], record: ProducerRecord[String, String]) {
+                            try {
+                            producer.send(record).get
+                            } catch {
+                            case e: Exception =>
+                            // catch all exceptions
+                            e.printStackTrace()
+                            }
+                            }</code></pre>
+            </section>
+        </section>
+
+        <section>
+            <h2>STEP_1_4</h2>
+            <h3>Écriture asynchrone</h3>
+            <section></section>
+            <section>
+                <p>Il est possible d'envoyer des messages auxx brokers Kafka de manière asynchrone et d'impléménter une méthode de callback qui sera appelée lorsque les brokers Kafka se seront acquitté de l'écriture du message.</p>
+            </section>
+            <section>
+                <p>Dans la boucle infinie de la méthode <i>main</i> du <i>ScalaProducer</i> : Modifier l'appel à <i>sendSynchronously</i> par un appel à <i>sendAsynchronously</i></p>
+            </section>
+            <section>
+                <p>Ecrire une classe <i>DemoProducerCallback</i> qui implémente l'interface <i>org.apache.kafka.clients.producer.Callback</i>.</p>
+            </section>
+            <section>
+                <p>Dans cette classe vous devrez implémenter la méthode <i>onCompletion</i> qui possède deux arguments : </p>
+                <p><i>RecordMetadata recordMetadata</i> qui renvoie des informations sur le message en cas de succès</p>
+                <p><i>Exception e</i> qui sera non null en cas d'erreur</p>
+            </section>
+            <section>
+                <p>Afficher simplement la stacktrace en cas d'erreur</p>
+                <p>Afficher dans la console les informations que vous jugerez pertinentes en cas de succès (offset, partition, topic...)</p>
+            </section>
+            <section>
+                <p>Dans la méthode <i>sendAsynchronously</i> du <i>ScalaProducer</i> : envoyer le message aux brokers Kafka de manière asynchrone en passant en paramètre une instance de <i>DemoProducerCallback</i>.</p>
+            </section>
+            <section>
+                <h4>Implémentez la section 1_4</h4>
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                        <pre><code class="hljs" data-trim>
+                            private def sendAsynchronously(producer: KafkaProducer[String, String], record: ProducerRecord[String, String]) {
+                            producer.send(record, new DemoProducerCallback())
+                            }</code></pre>
+            </section>
+            <section>
+                        <pre><code class="hljs" data-trim>
+                            class DemoProducerCallback extends Callback {
+                            def onCompletion(recordMetadata: RecordMetadata, e: Exception) {
+                            if (e != null) {
+                            e.printStackTrace()
+                            } else if (recordMetadata != null) {
+                            println(s"message ${recordMetadata.offset} sent to partition ${recordMetadata.partition} of topic ${recordMetadata.topic}")
+                            }
+                            }
+                            }</code></pre>
+            </section>
+        </section>
+
+        <section>
+            <h2>STEP_2</h2>
+            <h3>Codons un consommateur</h3>
+            <section data-background="http://i.giphy.com/SFRhYgSElTfvG.gif"></section>
+            <section>
+                <p>En suivant la même démarche, nous allons coder un consommateur Kafka à l'aide de la nouvelle API introduite avec la version 0.9.</p>
+            </section>
+            <section>
+                <p>Cette fois, nous allons travailler sur la classe <i>fr.xebia.devoxx.kafka.ScalaConsumer</i>.</p>
+            </section>
+            <section>
+                <p>Lire avec ce consommateur depuis Kafka consiste à :
+                <ol>
+                    <li>Configurer et instancier un <i>KafkaConsumer</i></li>
+                    <li>Abonner ce producer à un(ou des) topic(s)</li>
+                    <li>Obtenir des messages de type <i>ConsumerRecords</i> de ce topic</li>
+                    <li>Persister les offsets des partitions du topic consommées</li>
+                </ol>
+                </p>
+            </section>
+            <section>
+                <p>Pour se faire, vous allez devoir suivre les 6 TODOs de la classes <i>fr.xebia.devoxx.kafka.ScalaConsumer</i> en suivant les étapes décrites si dessous.</p>
+                <p>Cette classe est une classe exécutable que vous pouvez lancer depuis Eclipse ou IntelliJ.</p>
+            </section>
+        </section>
+
+
+        <section>
+            <h2>STEP_2_1</h2>
+            <h3>Instanciation d'un KafkaConsumer</h3>
+            <section></section>
+            <section>
+                <p>Instancier un <i>org.apache.kafka.clients.consumer.KafkaConsumer[K, V]</i> dans la méthode <i>createKafkaConsumer</i>.</p>
+            </section>
+            <section>
+                <p>Un consumer a besoin d'une Map de propriétés</p>
+            </section>
+            <section>
+                <p>Les 4 propriétés obligatoires sont : </p>
+            </section>
+            <section>
+                <p><i>bootstrap.servers</i></p>
+                <p>Liste de host:port, séparés par des virgules, pour se connecter aux brokers Kafka. Pas besoin, de mettre la liste complète des brokers. Néanmoins c'est une bonne pratique d'en mettre au moins deux pour que votre producer soit tolérant à la panne d'un broker.</p>
+
+                <p><i>group.id</i></p>
+                <p>L'identifiant du groupe de consommation auquel appartient ce consumer. Mettre une string arbitraire.</p>
+            </section>
+            <section>
+                <p><i>key.deserializer</i> / <i>value.deserializer</i></p>
+                <p>Les brokers Kafka manipulent les clés et valeurs des messages sous forme de byte arrays.</p>
+                <p>Mettre comme valeur le nom complet d'un classe qui implémente l'interface <i>org.apache.kafka.common.serialization.Deserializer</i>.<p>
+            </section>
+            <section>
+                <p>Le consumer utilisera cette classe pour "deserialiser" les byte arrays des clés et valeurs des messages en objets java.</p>
+                <p>Dans cet exercice nous manipulerons des messages avec des clés et des valeurs de types String.</p>
+            </section>
+            <section>
+                <h4>Implémentez la section 2_1</h4>
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                        <pre><code class="hljs" data-trim>
+                            private def createKafkaConsumer(): KafkaConsumer[String, String] = {
+                            import scala.collection.JavaConversions._
+                            val props = Map(
+                            "bootstrap.servers" -> "localhost:9092,localhost:9093",
+                            "group.id" -> "whatever",
+                            "key.deserializer" -> "org.apache.kafka.common.serialization.StringDeserializer",
+                            "value.deserializer" -> "org.apache.kafka.common.serialization.StringDeserializer"
+                            )
+                            new KafkaConsumer[String, String](props)
+                            }</code></pre>
+            </section>
+        </section>
+
+
+        <section>
+            <h2>STEP_2_2</h2>
+            <h3>Abonnement au topic et consommation</h3>
+            <section></section>
+            <section>
+                <p>Juste avant la boucle infinie de la méthode <i>main</i></p>
+                <p>Abonner le consumer au topic devoxx à l'aide de la méthode <i>subcribe</i>.</p>
+            </section>
+            <section>
+                <p>Dans la boucle infinie : </p>
+                <p>Récupérer les messages du topic devoxx à l'aide la méthode <i>poll</i>.</p>
+            </section>
+            <section>
+                <p>poll() retourne une collection de <i>ConsumerRecord</i>.</p>
+                <p>Chaque record contient le topic du message, la partition d'où provient le message, l'offset du message dans cette partition, et bien sur la clé et la valeur du message.</p>
+                <p>Itérer sur ces messages pour les afficher à l'aide de la méthode <i>display</i> codée pour vous.</p>
+            </section>
+            <section>
+                <p>poll() prend en paramètre un en entier représentant un timeout en millisecondes.</p>
+                <p>Ceci indique le temps maximum qu'il faudra à l'appel à cette méthode pour renvoyer un résultat, avec ou sans données.</p>
+            </section>
+            <section>
+                <h4>Implémentez la section 2_2</h4>
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                        <pre><code class="hljs" data-trim>
+                            def main(args: Array[String]) {
+                            import scala.collection.JavaConversions._
+                            //configuration d'un consumer
+                            val consumer: KafkaConsumer[String, String] = createKafkaConsumer()
+
+                            // TODO 2_2
+                            consumer.subscribe(Collections.singletonList("devoxx"), new HandleRebalance())
+                            try {
+                            while (true) {
+                            val records: ConsumerRecords[String, String] = consumer.poll(1000)
+                            for (record <- records) {
+                            display(record)
+                            }
+                            }
+                            } finally {
+                            consumer.close()
+                            }
+                            }</code></pre>
+            </section>
+        </section>
+
+
+        <section>
+            <h2>STEP_2_3</h2>
+            <h3>Auto commit</h3>
+            <section></section>
+            <section>
+                <p>Par defaut un KafkaConsumer va commiter automatiquement les offsets des messages pour chaque partitions consommées</p>
+            </section>
+            <section>
+                <p>Ajouter au properties utilisées lors de la création du KafkaConsumer</p>
+                <p><i>enable.auto.commit</i></p>
+                <p>Indique si le consumer va commiter automatiquement les offsets des messages</p>
+                <p>true par défaut</p>
+            </section>
+            <section>
+                <p><i>auto.commit.interval.ms</i></p>
+                <p>La fréquence de commit en millisecondes. Si auto commit est à true</p>
+                <p>5000 par défaut</p>
+            </section>
+            <section>
+                <p><i>auto.offset.reset</i></p>
+                <p>
+                    Controle le comportement du consumer lorsqu'il commence à lire les messages d'une partition pour laquelle il n'a pas encore commité d'offset :
+                <ul>
+                    <li><i>earliest</i> : consomme les messages depuis le début</li>
+                    <li><i>latest</i> : consomme uniquement les nouveaux messages</li>
+                    <li><i>none</i> : exception si il n'y pas d'offset commité pour ce groupe de consommation</li>
+                </ul>
+                </p>
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                        <pre><code class="hljs" data-trim>
+                            private def createKafkaConsumer(): KafkaConsumer[String, String] = {
+                            import scala.collection.JavaConversions._
+                            val props = Map(
+                            "bootstrap.servers" -> "localhost:9092,localhost:9093",
+                            "group.id" -> "whatever",
+                            "key.deserializer" -> "org.apache.kafka.common.serialization.StringDeserializer",
+                            "value.deserializer" -> "org.apache.kafka.common.serialization.StringDeserializer",
+                            "enable.auto.commit" -> "true",
+                            "auto.commit.interval.ms" -> "5000"
+                            )
+                            new KafkaConsumer[String, String](props)
+                            }</code></pre>
+            </section>
+            <section>
+                <p>À ce stage, vous pouvez lancer la classe <i>fr.xebia.devoxx.kafka.ScalaConsumer</i> et voir les messages envoyés par le producer.</p>
+                <p>Vous pouvez donc fermer le consommateur en CLI.</p>
+            </section>
+            <section>
+                <p>Kafka agit comme un broker de messages.</p>
+                <p>Arrêtez le consommateur quelques secondes, relancer le, vous verrez alors que le consommateur reprend depuis le dernier offest commité.</p>
+            </section>
+        </section>
+
+        <section>
+            <h2>STEP_2_4</h2>
+            <h3>Commit manuel synchrone</h3>
+            <section></section>
+            <section>
+                <p>Modifier la properties enable.auto.commit à false</p>
+            </section>
+            <section>
+                <p>Dans la boucle infinie, après l'affichage des messages renvoyés par la méthode <i>poll</i> :</p>
+                <p>appler la méthode <i>manualCommit</i></p>
+            </section>
+            <section>
+                <p>Dans la méthode <i>manualCommit</i></p>
+                <p>Commiter les offsets des partitions consommées de manière synchrone en appelant la méthode <i>commitSync</i> du consumer.</p>
+            </section>
+            <section>
+                <h4>Implémentez la section 2_4</h4>
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                        <pre><code class="hljs" data-trim>
+                            private def manualCommit(consumer: KafkaConsumer[String, String]) {
+                            try {
+                            consumer.commitSync()
+                            } catch {
+                            case e: CommitFailedException => e.printStackTrace()
+                            }
+                            }</code></pre>
+            </section>
+        </section>
+
+        <section>
+            <h2>STEP_2_5</h2>
+            <h3>Commit manuel asynchrone</h3>
+            <section></section>
+            <section>
+                <p>Dans la boucle infinie, après l'affichage des messages renvoyés par la méthode <i>poll</i> :</p>
+                <p>appler la méthode <i>manualAsynchronousCommit</i></p>
+            </section>
+            <section>
+                <p>Dans la méthode <i>manualAsynchronousCommit</i></p>
+                <p>Commiter les offsets des partitions consommées de manière asynchrone en appelant la méthode <i>commitAsync</i> du consumer.</p>
+            </section>
+            <section>
+                <p>Passer en paramètre de la méthode <i>commitAsync</i> une lambda implémentant l'inteface <i>org.apache.kafka.clients.consumer.OffsetCommitCallback</i></p>
+            </section>
+            <section>
+                <p>Dans cette classe/lambda vous devrez implémenter la méthode <i>onComplete</i> qui possède deux arguments : </p>
+                <p><i>Map[TopicPartition, OffsetAndMetadata] offsets</i> qui renvoie des informations sur les offsets par partition en cas de succès</p>
+                <p><i>Exception e</i> qui sera non null en cas d'erreur</p>
+            </section>
+            <section>
+                <p>Afficher simplement la stacktrace en cas d'erreur</p>
+                <p>Afficher dans la console les informations que vous jugerez pertinentes en cas de succès (offset, partition, topic...)</p>
+            </section>
+            <section>
+                <h4>Implémentez la section 2_5</h4>
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                        <pre><code class="hljs" data-trim>
+                            private def manualAsynchronousCommit(consumer: KafkaConsumer[String, String]) {
+                            import scala.collection.JavaConversions._
+                            consumer.commitAsync {
+                            new OffsetCommitCallback {
+                            override def onComplete(offsets: util.Map[TopicPartition, OffsetAndMetadata], exception: Exception) {
+                            if (exception != null) {
+                            exception.printStackTrace()
+                            } else if (offsets != null) offsets.entrySet().foreach(
+                            entry => {
+                            val topicPartition = entry.getKey
+                            val offsetAndMetadata = entry.getValue
+                            println(s"commited offset ${offsetAndMetadata.offset} for partition ${topicPartition.partition} of topic ${topicPartition.topic}")
+                            }
+                            )
+                            }
+                            }
+                            }
+                            }</code></pre>
+            </section>
+        </section>
+
+        <section>
+            <h2>STEP_2_6</h2>
+            <h3>Consumer Group Rebalance</h3>
+            <section></section>
+            <section>
+                <p>Il est possible de passer un argument supplémentaire à la méthode <i>subscribe</i> du consumer pour executer du code lorqu'un consumer se voit assigner ou revoquer une partition</p>
+            </section>
+            <section>
+                <p>Créer une classe statique privée dans <i>ScalaConsumer</i> implémentant l'interface <i>org.apache.kafka.clients.consumer.ConsumerRebalanceListener</i></p>
+                <p>Dans la méthode <i>onPartitionsAssigned</i> afficher dans la console les partitions assignées</p>
+                <p>Dans la méthode <i>onPartitionsRevoked</i> afficher dans la console les partitions revoquées</p>
+            </section>
+            <section>
+                <p>Modifier l'appel à la méthode <i>subscribe</i> dans le <i>main</i> pour passer en second argument une instance de cette classe.</p>
+            </section>
+            <section>
+                <h4>Implémentez la section 2_6</h4>
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                        <pre><code class="hljs" data-trim>
+                            class HandleRebalance extends ConsumerRebalanceListener {
+                            import scala.collection.JavaConversions._
+                            override def onPartitionsAssigned(partitions: util.Collection[TopicPartition]) {
+                            partitions.foreach(topicPartition => println(s"Assigned partition ${topicPartition.partition} of topic ${topicPartition.topic}"))
+                            }
+
+                            override def onPartitionsRevoked(partitions: util.Collection[TopicPartition]) {
+                            partitions.foreach(topicPartition => println(s"Revoked partition ${topicPartition.partition} of topic ${topicPartition.topic}"))
+                            }
+                            }</code></pre>
+            </section>
+            <section>
+                <p>Lancer un consumer -> il se voit attribuer les 4 partitions du topic</p>
+            </section>
+            <section>
+                <p>Lancer un deuxième consumer -> chacun des consumers consomment deux partitions du topic</p>
+            </section>
+            <section>
+                <p>Lancer un troisième consumer -> deux consumers consomment une partition. Le dernier en consomme deux.</p>
+            </section>
+            <section>
+                <p>Lancer un quatrième consumer -> chacun des consumers consomment une partition du topic</p>
+            </section>
+            <section>
+                <p>Lancer un cinquième consumer -> 4 consumers consomment une partition du topic. Le dernier ne fait rien.</p>
+                <p>Le nombre de partition d'un topic determine le parallelisme maximal de consommation!</p>
+            </section>
+            <section>
+                <p>Arreter tous vos consumers</p>
+            </section>
+            <section>
+                <p>Lancer deux consumers : ils consomment chacun deux partitions</p>
+            </section>
+            <section>
+                <p>Arreter un des deux consumers</p>
+                <p>Le consumer restant reprend la consommation des deux partitions consommées par le consumer arrêté...</p>
+                <p>Au bout de 30s par défaut... c'est long</p>
+            </section>
+            <section>
+                <p>C'est dû à la valeur de la property <i>session.timeout.ms</i></p>
+                <p>Elle détermine le temps en millisecondes pendant lequel un consommateur qui a perdu contact avec les brokers Kafka est toujours considérer comme "vivant"</p>
+                <p>Valeur par défaut 30000</p>
+            </section>
+            <section>
+                <p>En appelant la méthode <i>close</i> sur un consumer on libère immédiatement les partitions qui lui été assignées et on provoque un rebalance</p>
+            </section>
+            <section>
+                <p>Copier ce shutdownhook dans la méthode <i>main</i> après la création du consumer</p>
+            </section>
+            <section>
+                        <pre><code class="hljs" data-trim>
+                            final Thread mainThread = Thread.currentThread();
+
+                            Runtime.getRuntime().addShutdownHook(new Thread() {
+                            public void run() {
+                            System.out.println("Starting exit...");
+                            // Note that shutdownhook runs in a separate thread, so the only thing we can safely do to a consumer is wake it up
+                            consumer.wakeup();
+                            try {
+                            mainThread.join();
+                            } catch (InterruptedException e) {
+                            e.printStackTrace();
+                            }
+                            }
+                            });</code></pre>
+            </section>
+            <section>
+                <p>Ce shutdownhook va provoquer une WakeupException dans notre boucle infinie avant l'arrêt de notre application</p>
+                <p>La clause finally de notre méthode main va appeler la méthode <i>close</i> sur notre consumer</p>
+            </section>
+            <section>
+                <p>Lancer à nouveau deux consumers</p>
+                <p>Stopper un des deux consumers</p>
+                <p>Le rebalance est immédiat!</p>
+            </section>
+        </section>
+
+        <section>
+            <h2>STEP_3</h2>
+            <h3>Batch consumer</h3>
+            <section data-background="img/K48x3A2pHglFK.gif"></section>
+            <section>
+                <p>Nous allons coder un consommateur Kafka en mode batch à l'aide de la nouvelle API introduite avec la version 0.9.</p>
+            </section>
+            <section>
+                <p>Cette fois, nous allons travailler sur la classe <i>fr.xebia.devoxx.kafka.ScalaBatchConsumer</i>.</p>
+            </section>
+            <section>
+                <p>Créer un job avec ce consommateur depuis Kafka consiste à :
+                <ol>
+                    <li>Configurer et instancier un <i>KafkaConsumer</i></li>
+                    <li>Assigner les partitions du topic à ce consumer</li>
+                    <li>Assigner un offset pour chaque partition consommée</li>
+                    <li>Obtenir des messages de type <i>ConsumerRecords</i> des partitions</li>
+                </ol>
+                </p>
+            </section>
+            <section>
+                <p>Pour se faire, vous allez devoir suivre les 4 TODOs de la classes <i>fr.xebia.devoxx.kafka.ScalaBatchConsumer</i> en suivant les étapes décrites si dessous.</p>
+                <p>Cette classe est une classe exécutable que vous pouvez lancer depuis Eclipse ou IntelliJ.</p>
+            </section>
+        </section>
+
+        <section>
+            <h2>STEP_3_1</h2>
+            <h3>Instanciation d'un KafkaConsumer</h3>
+            <section></section>
+            <section>
+                <p>Instancier un <i>org.apache.kafka.clients.consumer.KafkaConsumer[K, V]</i> dans la méthode <i>createKafkaConsumer</i>.</p>
+            </section>
+            <section>
+                <p>Pas besoin de commiter les offsets ici : mettre la valeur de la property enable.auto.commit à false</p>
+            </section>
+            <section>
+                <h4>Implémentez la section 3_1</h4>
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                        <pre><code class="hljs" data-trim>
+                            private def createKafkaConsumer(): KafkaConsumer[String, String] = {
+                            import scala.collection.JavaConversions._
+                            val props = Map(
+                            "bootstrap.servers" -> "localhost:9092,localhost:9093",
+                            "key.deserializer" -> "org.apache.kafka.common.serialization.StringDeserializer",
+                            "value.deserializer" -> "org.apache.kafka.common.serialization.StringDeserializer",
+                            "enable.auto.commit" -> "false",
+                            "group.id" -> "batch"
+                            )
+                            new KafkaConsumer[String, String](props)
+                            }</code></pre>
+            </section>
+        </section>
+
+        <section>
+            <h2>STEP_3_2</h2>
+            <h3>Assigner les partitions du topic à ce consumer</h3>
+            <section></section>
+            <section>
+                <p>Ici nous utiliserons une seul instance de ce batch consumer</p>
+                <p>Nul besoin de groupe de consommation ou de rebalance</p>
+                <p>Nous allons assigner les partitions consommées par ce job manuellement</p>
+            </section>
+            <section>
+                <p>Dans la methode <i>assignPartitions</i> : récupérer la liste des partitions du topic devoxx à l'aide de la méthode <i>partitionsFor</i> du consumer</p>
+                <p>Transformer cette liste de <i>PartitionInfo</i> en une liste de <i>TopicPartition</i></p>
+                <p>assigne la liste de <i>TopicPartition</i> au consumer à l'aide de la méthode <i>assign</i> </p>
+            </section>
+            <section>
+                <h4>Implémentez la section 3_2</h4>
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                        <pre><code class="hljs" data-trim>
+                            private def assignPartitions(consumer: KafkaConsumer[String, String]) {
+                            import scala.collection.JavaConversions._
+                            val partitionInfos = consumer.partitionsFor("devoxx")
+                            val topicPartitions = partitionInfos.map(partitionInfo => new TopicPartition("devoxx", partitionInfo.partition()))
+                            System.out.println(topicPartitions)
+                            consumer.assign(topicPartitions)
+                            }</code></pre>
+            </section>
+        </section>
+
+        <section>
+            <h2>STEP_3_3</h2>
+            <h3>Assigner un offset pour chaque partition consommée</h3>
+            <section></section>
+            <section>
+                <p>Dans la methode <i>seek</i> : assigner aux consumers l'offset du premier message pour chaque partition</p>
+                <p>Chercher la méthode apropriée de l'objet consumer...</p>
+            </section>
+            <section>
+                <h4>Implémentez la section 3_3</h4>
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                        <pre><code class="hljs" data-trim>
+                            private def seek(consumer: KafkaConsumer[String, String]) {
+                            consumer.seekToBeginning()
+                            }</code></pre>
+            </section>
+        </section>
+
+        <section>
+            <h2>STEP_3_4</h2>
+            <h3>Consommer les messages</h3>
+            <section></section>
+            <section>
+                <h4>Implémentez la section 3_4</h4>
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                        <pre><code class="hljs" data-trim>
+                            private def process(consumer: KafkaConsumer[String, String]) {
+                            import scala.collection.JavaConversions._
+                            var records = consumer.poll(1000)
+                            while (!records.isEmpty) {
+                            for (record <- records) {
+                            println(s"topic = ${record.topic}, partition: ${record.partition}, offset: ${record.offset}: ${record.value}")
+                            }
+                            records = consumer.poll(1000)
+                            }
+                            }</code></pre>
+            </section>
+            <section>
+                <p>Lancer la class <i>ScalaBatchConsumer</i></p>
+                <p>Constater que c'est tout de même assez rapide, même dans des conditions de développement</p>
+            </section>
+        </section>
+
+        <section>
+            <h2>STEP_4</h2>
+            <h3>Kafka Connect</h3>
+            <section data-background="img/xTiTnDhp65BN2Ns3Go.gif"></section>
+            <section></section>
+            <section>
+                <p>Kafka Connect permet de créer des connecteurs entre Kafka et des systèmes de données.</p>
+                <p>Il existe dès aujourd'hui un certain nombre de connecteurs développés par la communauté :</p>
+            </section>
+            <section>
+                <p>
+                <ul>
+                    <li>HDFS</li>
+                    <li>JDBC</li>
+                    <li>ElasticSearch</li>
+                    <li>Cassandra</li>
+                    <li>MySQL</li>
+                    <li>...</li>
+                    <li>voir : <a href="http://www.confluent.io/developers/connectors">Kafka Connector Hub</a></li>
+                </ul></p>
+                <p>Kafka Connect ne fait qu'un seule chose : envoyer des données depuis ou vers Kafka.</p>
+            </section>
+            <section>
+                <p>Dans la plupart des cas, il ne sera pas nécessaire d'écrire du code spécifique pour envoyer des données vers Kafka</p>
+                <p>Il vous suffira de persister les données crées par votre système dans votre base de données/système de données préféré</p>
+                <p>Et de configurer et lancer le connecteur Kafka aproprié pour envoyer ces données dans un topic Kafka.</p>
+            </section>
+            <section>
+                <p>Nous allons envoyer des donneés vers Kafka depuis un système de données qui sera ici un simple fichier texte.</p>
+            </section>
+            <section>
+                <p>Commencer par créer un nouveau topic devoxx-connect.</p>
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                        <pre><code class="hljs" data-trim>
+                            ./bin/kafka-topics.sh --create --topic devoxx-connect \
+                            --partition 4 --replication-factor 2 --zookeeper 127.0.0.1:2181</code></pre>
+            </section>
+            <section>
+                <p>A la racine de votre installation de Kafka : créer un fichier best-db-ever.txt</p>
+                <p>Puis un deuxième fichier : second-best-db-ever.txt</p>
+            </section>
+            <section>
+                <p>dans un terminal lancer la commande : </p>
+                <p><pre><code class="hljs" data-trim>tail -f second-best-db-ever.txt</code></pre></p>
+            </section>
+            <section>
+                <p>Nous allons lancer le service Kafka Connect en mode standalone avec deux connecteurs</p>
+                <p>Un premier qui va "écouter" les messages envoyés à notre première base de données (les lignes de notre fichier texte) et envoyer ces messages dans le topic devoxx-connect</p>
+                <p>Un deuxième qui va consommer les messages du topic devoxx-connect et les envoyer à notre deuxième base de données (écrire un ligne par message dans le fichier texte)</p>
+            </section>
+            <section>
+                <p>La configuration du service Kafka Connect sera le fichier config/connect-standalone.properties</p>
+                <p>Modifier les valeurs des properties key.converter et value.converter en :</p>
+                <p><pre><code class="hljs" data-trim>org.apache.kafka.connect.storage.StringConverter</code></pre></p>
+            </section>
+            <section>
+                <p>Nous utiliserons le fichier config/connect-file-source.properties pour le premier connecteur</p>
+                <p>Nous utiliserons le fichier config/connect-file-sink.properties pour le second connecteur</p>
+            </section>
+            <section>
+                <p>Modifier les properties de ces fichiers pour lire les données de best-db-ever.txt et les envoyer vers second-best-db-ever.txt en passant par le topic Kafka devoxx-connect</p>
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                <p>connect-file-source.properties</p>
+                <p><pre><code class="hljs" data-trim>name=local-file-source
+                connector.class=org.apache.kafka.connect.file.FileStreamSourceConnector
+                tasks.max=1
+                file=best-db-ever.txt
+                topic=devoxx-connect</code></pre></p>
+            </section>
+            <section>
+                <p>connect-file-sink.properties</p>
+                <p><pre><code class="hljs" data-trim>name=local-file-sink
+                connector.class=org.apache.kafka.connect.file.FileStreamSinkConnector
+                tasks.max=1
+                file=second-best-db-ever.txt
+                topics=devoxx-connect</code></pre></p>
+            </section>
+            <section>
+                <p>Lancer le service Kafka Connect</p>
+                <p><pre><code class="hljs" data-trim>./bin/connect-standalone.sh config/connect-standalone.properties \
+                config/connect-file-source.properties config/connect-file-sink.properties</code></pre></p>
+            </section>
+            <section>
+                <p>Ecrire des lignes dans le fichier best-db-ever.txt</p>
+                <p>Elles sont automatiquement répliquées dans le fichier second-best-db-ever.txt!</p>
+            </section>
+            <section>
+                <p>Attention le premier connecteur se base sur le byte offset du fichier texte pour détecter des nouveaux messages.</p>
+                <p>N'ecrire qu'à la fin de votre fichier!</p>
+            </section>
+            <section>
+                <p>Kafka Connect permet ainsi de facilement mettre à disposition le flux de modification d'un système de données
+                    à tous les acteurs de votre data center, sans créer de connections point à point entre votre système source et vos sytèmes cibles.</p>
+            </section>
+        </section>
+
+        <section>
+            <h2>STEP_5</h2>
+            <h3>Kafka Streams</h3>
+            <section data-background="img/YotKRfokBujGE.gif"></section>
+            <section></section>
+            <section>
+                <p>Nouveauté de la version 0.10.0.0 de Kafka</p>
+                <p>Kafka Streams est une librairie permettant d'analyser et de transformer les flux de données persistées dans Kafka</p>
+            </section>
+            <section>
+                <p>Simple et legère cette librairie vous permet de facilement créer un job de stream processing sans sortir l'artillerie lourde de type Spark ou Storm...</p>
+                <p>Seule contrainte : elle ne sait lire/ecrire des données que depuis et vers Kafka</p>
+            </section>
+            <section>
+                <p>Commençons par créer un stream processing très simple qui va légerement modifier nos messages provenant de notre base de données crée dans l'exercice précedent</p>
+                <p>Cette fois, nous allons travailler sur la classe <i>fr.xebia.devoxx.kafka.ScalaKStream</i>.</p>
+            </section>
+        </section>
+
+        <section>
+            <h2>STEP_5_1</h2>
+            <h3>Créer un KStreamBuilder</h3>
+            <section></section>
+            <section><p>Créer simplement une instance de <i>org.apache.kafka.streams.kstream.KStreamBuilder</i></p></section>
+            <section>
+                <h4>Implémentez la section 5_1</h4>
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                <pre><code class="hljs" data-trim>val kStreamBuilder: KStreamBuilder = new KStreamBuilder()</code></pre>
+            </section>
+        </section>
+
+        <section>
+            <h2>STEP_5_2</h2>
+            <h3>Créer un KStream</h3>
+            <section></section>
+            <section><p>Créer un KStream, flux des données du topic Kafka "devoxx-connect" à l'aide de la méthode <i>stream</i> du <i>kStreamBuilder</i></section>
+            <section>
+                <h4>Implémentez la section 5_2</h4>
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                <pre><code class="hljs" data-trim>val source: KStream[String, String] = kStreamBuilder.stream("devoxx-connect")</code></pre>
+            </section>
+        </section>
+
+        <section>
+            <h2>STEP_5_3</h2>
+            <h3>Transformer les messages du stream</h3>
+            <section></section>
+            <section>
+                <p>Créer un nouveau KStream en appelant la méthode <i>map</i> sur le stream précedent</p>
+                <p>Modifier la valeur des messages en prefixant celle-ci par "STREAM : "</p>
+            </section>
+            <section>
+                <h4>Implémentez la section 5_3</h4>
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                        <pre><code class="hljs" data-trim>val sink: KStream[String, String] = source.map {
+                            new KeyValueMapper[String, String, KeyValue[String, String]] {
+                            override def apply(key: String, value: String): KeyValue[String, String] = new KeyValue[String, String](key, "STREAM : " + value)
+                            }
+                            }</code></pre>
+            </section>
+        </section>
+
+        <section>
+            <h2>STEP_5_4</h2>
+            <h3>Envoyer les messages transformés dans un nouveau topic</h3>
+            <section></section>
+            <section>
+                <p>Envoyer les messages du stream précédent dans le topic "devoxx-streams-out" en appelant la méthode <i>to</i> sur le kStream</p>
+            </section>
+            <section>
+                <h4>Implémentez la section 5_4</h4>
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                <pre><code class="hljs" data-trim>sink.to("devoxx-streams-out");</code></pre>
+            </section>
+        </section>
+
+        <section>
+            <h2>STEP_5_5</h2>
+            <h3>Créer un KafkaStreams</h3>
+            <section></section>
+            <section>
+                <p>Créer un objet de type <i>org.apache.kafka.streams.KafkaStreams</i> en passant en arguments du constructeur le kStreamBuilder et un objet Properties de configuration</p>
+            </section>
+            <section>
+                <p>Dans l'objet Properties, vous devrez configurer les properties possédant les clés suivantes :</p>
+                <ul>
+                    <li>StreamsConfig.JOB_ID_CONFIG</li>
+                    <li>StreamsConfig.BOOTSTRAP_SERVERS_CONFIG</li>
+                    <li>StreamsConfig.ZOOKEEPER_CONNECT_CONFIG</li>
+                    <li>StreamsConfig.KEY_SERIALIZER_CLASS_CONFIG</li>
+                    <li>StreamsConfig.VALUE_SERIALIZER_CLASS_CONFIG</li>
+                    <li>StreamsConfig.KEY_DESERIALIZER_CLASS_CONFIG</li>
+                    <li>StreamsConfig.VALUE_DESERIALIZER_CLASS_CONFIG</li>
+                </ul>
+            </section>
+            <section>
+                <h4>Implémentez la section 5_5</h4>
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                        <pre><code class="hljs" data-trim>val props: Properties = new Properties
+                            props.put(StreamsConfig.JOB_ID_CONFIG, "streams")
+                            props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092,localhost:9093")
+                            props.put(StreamsConfig.ZOOKEEPER_CONNECT_CONFIG, "localhost:2181")
+                            props.put(StreamsConfig.KEY_SERIALIZER_CLASS_CONFIG, classOf[StringSerializer])
+                            props.put(StreamsConfig.VALUE_SERIALIZER_CLASS_CONFIG, classOf[StringSerializer])
+                            props.put(StreamsConfig.KEY_DESERIALIZER_CLASS_CONFIG, classOf[StringDeserializer])
+                            props.put(StreamsConfig.VALUE_DESERIALIZER_CLASS_CONFIG, classOf[StringDeserializer])
+
+                            // setting offset reset to earliest so that we can re-run the demo code with the same pre-loaded data
+                            props.put(StreamsConfig.AUTO_OFFSET_RESET_CONFIG, "latest")
+
+                            val kafkaStreams: KafkaStreams = new KafkaStreams(kStreamBuilder, props)</code></pre>
+            </section>
+        </section>
+
+        <section>
+            <h2>STEP_5_6</h2>
+            <h3>Démarrer le KafkaStreams</h3>
+            <section></section>
+            <section>
+                <p>Pour démarrer le KafkaStreams appeler simplement sa méthode <i>start</i></p>
+            </section>
+            <section>
+                <h4>Implémentez la section 5_5</h4>
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                <pre><code class="hljs" data-trim>kafkaStreams.start()</code></pre>
+            </section>
+            <section>
+                <p>modifier la configuration du fichier config/connect-file-sink.properties pour écouter les messages du topic devoxx-streams-out</p>
+                <p>relancer le service KafkaConnect</p>
+            </section>
+            <section>
+                <p>Lancer la classe <i>ScalaKStream</i></p>
+            </section>
+            <section>
+                <p>Ecrire des lignes dans le fichier best-db-ever.txt</p>
+                <p>Elles sont automatiquement répliquées dans le fichier second-best-db-ever.txt avec une petite transformation apportée par notr KafkaStream!</p>
+            </section>
+        </section>
+
+        <section>
+            <h2>Step 6</h2>
+            <h3>Bonus : Spark Streaming Client</h3>
+            <section data-background="img/bbV0dIIjL0rgA.gif"></section>
+            <section>
+                <p>Nous allons maintenant consommer les messages en streaming presque temps réel.</p>
+            </section>
+            <section>
+                <p>Spark est un framework de calcul distribué de données et propose une fonctionnalité
+                    de traitement en micro-batch simulant du temps réel : Spark Streaming. Nous allons
+                    coder un batch Spark Streaming récupérant les données de notre cluster Kafka.</p>
+            </section>
+            <section>
+                <p>Développons un traitement qui analysera la charge moyenne de CPU des 5
+                    dernières secondes.</p>
+            </section>
+        </section>
+
+        <section>
+            <h2>Step 6_1</h2>
+            <section></section>
+            <section>
+                <p>Nous allons commencer par créer un context de streaming spark.</p>
+                <p>Vous aurez également besoin d'instancier une configuration Spark.
+                    Le "master" de cette configuration doit être "local[2]" afin de
+                    faire fonctionner Spark sur votre machine.</p>
+            </section>
+            <section>
+                <h4>Indice</h4>
+            </section>
+            <section>
+                <p>Instancier la classe org.apache.spark.streaming.kafka.StreamingContext</p>
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                        <pre><code class="hljs" data-trim>
+                            def createStreamContext(): StreamingContext = {
+                            val conf = new SparkConf()
+                            .setMaster("local[2]")
+                            .setAppName("kafka-spark-streaming")
+
+                            new StreamingContext(new SparkContext(conf), Seconds(5))
+                            }
+                        </code></pre>
+            </section>
+        </section>
+
+        <section>
+            <h2>Step 6_2</h2>
+            <section></section>
+            <section>
+                <p>Nous allons maintenant créer le stream de données.</p>
+                <p>Regarder du côter de la classe org.apache.spark.streaming.kafka.KafkaUtils</p>
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                        <pre><code class="hljs" data-trim>
+                            def createStream(context: StreamingContext): InputDStream[(String, String)] = {
+                            val zookeeper = "localhost:2181"
+                            val clientName = "streaming-client"
+                            val topics = Map("handsonkafka" -> 4)
+                            KafkaUtils.createStream(context, zookeeper, clientName, topics)
+                            }
+                        </code></pre>
+            </section>
+        </section>
+
+        <section>
+            <h2>Step 6_3</h2>
+            <section></section>
+            <section>
+                <p>La dernière étape consiste à traiter les données que l'on reçoit.
+                    Nous allons donc travailler sur le stream de données.</p>
+            </section>
+            <section>
+                <h4>Indices</h4>
+            </section>
+            <section>
+                Le stream contient des tuples clés/valeurs. Nous ne nous intéresserons ici qu'aux valeurs.
+            </section>
+            <section>
+                La fonction "map" d'un stream applique une transformation sur le stream de données.
+            </section>
+            <section>
+                Spark travaille sur un concept de RDD (Resillient Distributed DataSet) qui est une collection
+                d'objets distribuée. La fonction "foreachRDD" permet d'appliquer une fonction qui ait
+                besoin de tous les éléments de la collection.
+            </section>
+            <section>
+                <h4>Solution</h4>
+            </section>
+            <section>
+                        <pre><code class="hljs" data-trim>
+                            stream.map(_._2)
+                            .map(extractValueFromRecord)
+                            .foreachRDD(rdd => displayAvg(rdd))
+
+                            streamingContext.start()
+                            streamingContext.awaitTermination()
+                        </code></pre>
+            </section>
+        </section>
+
+        <section>
+            <h2>SUMMARY</h2>
+            <section></section>
+            <section>
+                <p>Nous avons vu ensemble:<ul>
+                <li>les rôles de Kafka et Zookeeper</li>
+                <li>comment créer des topics et partitions</li>
+                <li>comment produire et consommer de la données</li>
+                <li>l'utilisation de Kafka Connect et Kafka Streams</li>
+            </ul></p>
+            </section>
+            <section>
+                <p>Pour résumer, Kafka est un journal de log distribué, hautement disponible et performant.</p>
+                <p>Cette solution peut vraiment être considérée comment une base de donneés.</p>
+                <p>Son stockage de données est sûr et la persistence est au coeur même du système.</p>
+            </section>
+            <section>
+                <p>Ces caractéristiques en font aujourd'hui une plateforme incontournable dans l'univers BigData.</p>
+            </section>
+            <section>
+                <p>N'utilisez pas Kafka comme on utilise RabbitMQ, Kafka n'est pas un broker JMS.</p>
+            </section>
+            <section>
+                <p>Jetez un oeil à Confluent.io</p>
+            </section>
+        </section>
+
+
+        <section>
+            <h1>Merci</h1>
+        </section>
+    </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+
+        // Optional reveal.js plugins
+        dependencies: [
+            { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+            { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+            { src: 'plugin/zoom-js/zoom.js', async: true },
+            { src: 'plugin/notes/notes.js', async: true }
+        ]
     });
-}</code></pre>
-                    </section>
-                </section>
 
-                
-                
-                
-                <section>
-                    <h2>STEP_2</h2>
-                    <h3>Codons un consommateur</h3>
-                    <section data-background="http://i.giphy.com/SFRhYgSElTfvG.gif"></section>
-                    <section>
-                        <p>En suivant la même démarche, nous allons coder un consommateur Kafka à l'aide de la nouvelle API introduite avec la version 0.9.</p>
-                    </section>
-                    <section>
-                        <p>Cette fois, nous allons travailler sur la classe <i>fr.xebia.devoxx.kafka.JavaConsumer</i>.</p>
-                    </section>
-                    <section>
-                        <p>Lire avec ce consommateur depuis Kafka consiste à :
-                        <ol>
-                            <li>Configurer et instancier un <i>KafkaConsumer</i></li>
-                            <li>Abonner ce producer à un(ou des) topic(s)</li>
-                            <li>Obtenir des messages de type <i>ConsumerRecords</i> de ce topic</li>
-                            <li>Persister les offsets des partitions du topic consommées</li>
-                        </ol>
-                        </p>
-                    </section>
-                    <section>
-                        <p>Pour se faire, vous allez devoir suivre les 6 TODOs de la classes <i>fr.xebia.devoxx.kafka.JavaConsumer</i> en suivant les étapes décrites si dessous.</p>
-                        <p>Cette classe est une classe exécutable que vous pouvez lancer depuis Eclipse ou IntelliJ.</p>
-                    </section>
-                </section>
-                
-                
-                <section>
-                    <h2>STEP_2_1</h2>
-                    <h3>Instanciation d'un KafkaConsumer</h3>
-                    <section></section>
-                    <section>
-                        <p>Instancier un <i>org.apache.kafka.clients.consumer.KafkaConsumer&lt;K, V&gt;</i> dans la méthode <i>createKafkaConsumer</i>.</p>
-                    </section>
-                    <section>
-                        <p>Un consumer a besoin d'une Map de propriétés</p>
-                    </section>
-                    <section>
-                        <p>Les 4 propriétés obligatoires sont : </p>
-                    </section>
-                    <section>
-                        <p><i>bootstrap.servers</i></p>
-                        <p>Liste de host:port, séparés par des virgules, pour se connecter aux brokers Kafka. Pas besoin, de mettre la liste complète des brokers. Néanmoins c'est une bonne pratique d'en mettre au moins deux pour que votre producer soit tolérant à la panne d'un broker.</p>
+</script>
 
-                        <p><i>group.id</i></p>
-                        <p>L'identifiant du groupe de consommation auquel appartient ce consumer. Mettre une string arbitraire.</p>
-                    </section>
-                    <section>
-                        <p><i>key.deserializer</i> / <i>value.deserializer</i></p>
-                        <p>Les brokers Kafka manipulent les clés et valeurs des messages sous forme de byte arrays.</p>
-                        <p>Mettre comme valeur le nom complet d'un classe qui implémente l'interface <i>org.apache.kafka.common.serialization.Deserializer</i>.<p>
-                    </section>
-                    <section>
-                        <p>Le consumer utilisera cette classe pour "deserialiser" les byte arrays des clés et valeurs des messages en objets java.</p>
-                        <p>Dans cet exercice nous manipulerons des messages avec des clés et des valeurs de types String.</p>
-                    </section>
-                    <section>
-                        <h4>Implémentez la section 2_1</h4>
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>
-private static KafkaConsumer&lt;String, String&gt; createKafkaConsumer() {
-    // TODO 2_1
-    Map&lt;String, Object&gt; props = new HashMap<>();
-    // required properties
-
-
-    props.put("bootstrap.servers", "localhost:9092,localhost:9093");
-    props.put("group.id", "whatever");
-    props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-    props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-
-    return new KafkaConsumer<>(props);
-}</code></pre>
-                    </section>
-                </section>
-                
-                
-                <section>
-                    <h2>STEP_2_2</h2>
-                    <h3>Abonnement au topic et consommation</h3>
-                    <section></section>
-                    <section>
-                        <p>Juste avant la boucle infinie de la méthode <i>main</i></p>
-                        <p>Abonner le consumer au topic devoxx à l'aide de la méthode <i>subcribe</i>.</p>
-                    </section>
-                    <section>
-                        <p>Dans la boucle infinie : </p>
-                        <p>Récupérer les messages du topic devoxx à l'aide la méthode <i>poll</i>.</p>
-                    </section>
-                    <section>
-                        <p>poll() retourne une collection de <i>ConsumerRecord</i>.</p>
-                        <p>Chaque record contient le topic du message, la partition d'où provient le message, l'offset du message dans cette partition, et bien sur la clé et la valeur du message.</p>
-                        <p>Itérer sur ces messages pour les afficher à l'aide de la méthode <i>display</i> codée pour vous.</p>
-                    </section>
-                    <section>
-                        <p>poll() prend en paramètre un en entier représentant un timeout en millisecondes.</p>
-                        <p>Ceci indique le temps maximum qu'il faudra à l'appel à cette méthode pour renvoyer un résultat, avec ou sans données.</p>
-                    </section>
-                    <section>
-                        <h4>Implémentez la section 2_2</h4>
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>
-public static void main(String[] args) {
-    //configuration d'un consumer
-    KafkaConsumer&lt;String, String&gt; consumer = createKafkaConsumer();
-
-    // TODO 2_2
-    consumer.subscribe(Collections.singletonList("devoxx"));
-    try {
-        while (true) {
-            ConsumerRecords&lt;String, String&gt; consumerRecords = consumer.poll(100);
-            for (ConsumerRecord&lt;String, String&gt; consumerRecord : consumerRecords) {
-                display(consumerRecord);
-            }
-        }
-    } finally {
-        consumer.close();
-    }
-}</code></pre>
-                    </section>
-                </section>
-
-
-                <section>
-                    <h2>STEP_2_3</h2>
-                    <h3>Auto commit</h3>
-                    <section></section>
-                    <section>
-                        <p>Par defaut un KafkaConsumer va commiter automatiquement les offsets des messages pour chaque partitions consommées</p>
-                    </section>
-                    <section>
-                        <p>Ajouter au properties utilisées lors de la création du KafkaConsumer</p>
-                        <p><i>enable.auto.commit</i></p>
-                        <p>Indique si le consumer va commiter automatiquement les offsets des messages</p>
-                        <p>true par défaut</p>
-                    </section>
-                    <section>
-                        <p><i>auto.commit.interval.ms</i></p>
-                        <p>La fréquence de commit en millisecondes. Si auto commit est à true</p>
-                        <p>5000 par défaut</p>
-                    </section>
-                    <section>
-                        <p><i>auto.offset.reset</i></p>
-                        <p>
-                            Controle le comportement du consumer lorsqu'il commence à lire les messages d'une partition pour laquelle il n'a pas encore commité d'offset :
-                        <ul>
-                            <li><i>earliest</i> : consomme les messages depuis le début</li>
-                            <li><i>latest</i> : consomme uniquement les nouveaux messages</li>
-                            <li><i>none</i> : exception si il n'y pas d'offset commité pour ce groupe de consommation</li>
-                        </ul>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>
-private static KafkaConsumer&lt;String, String&gt; createKafkaConsumer() {
-    // TODO 2_1
-    Map&lt;String, Object&gt; props = new HashMap<>();
-    // required properties
-
-
-    props.put("bootstrap.servers", "localhost:9092,localhost:9093");
-    props.put("group.id", "test2");
-    props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-    props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-
-    // optional properties
-
-    // This parameter controls whether the consumer will commit offsets automatically
-    props.put("enable.auto.commit", "true");
-
-    // The frequency in milliseconds that the consumer offsets are auto-committed to Kafka if enable.auto.commit is set to true.
-    props.put("auto.commit.interval.ms", "5000");
-
-    // This property controls the behavior of the consumer when it starts reading a partition
-    // for which it doesn’t have a committed offset or if the committed offset it has is invalid
-    // earliest : automatically reset the offset to the earliest offset
-    // latest : automatically reset the offset to the latest offset
-    // none : throw exception to the consumer if no previous offset is found for the consumer's group
-    props.put("auto.offset.reset", "latest");
-
-    // Will be used by the brokers to identify messages sent from the client. It is used in logging, metrics and for quotas.
-    props.put("client.id", "");
-
-    return new KafkaConsumer<>(props);
-}</code></pre>
-                    </section>
-                    <section>
-                        <p>À ce stage, vous pouvez lancer la classe <i>fr.xebia.devoxx.kafka.JavaConsumer</i> et voir les messages envoyés par le producer.</p>
-                        <p>Vous pouvez donc fermer le consommateur en CLI.</p>
-                    </section>
-                    <section>
-                        <p>Kafka agit comme un broker de messages.</p>
-                        <p>Arrêtez le consommateur quelques secondes, relancer le, vous verrez alors que le consommateur reprend depuis le dernier offest commité.</p>
-                    </section>
-                </section>
-
-                <section>
-                    <h2>STEP_2_4</h2>
-                    <h3>Commit manuel synchrone</h3>
-                    <section></section>
-                    <section>
-                        <p>Modifier la properties enable.auto.commit à false</p>
-                    </section>
-                    <section>
-                        <p>Dans la boucle infinie, après l'affichage des messages renvoyés par la méthode <i>poll</i> :</p>
-                        <p>appler la méthode <i>manualCommit</i></p>
-                    </section>
-                    <section>
-                        <p>Dans la méthode <i>manualCommit</i></p>
-                        <p>Commiter les offsets des partitions consommées de manière synchrone en appelant la méthode <i>commitSync</i> du consumer.</p>
-                    </section>
-                    <section>
-                        <h4>Implémentez la section 2_4</h4>
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>
-private static void manualCommit(KafkaConsumer&lt;String, String&gt; consumer) {
-    // TODO 2_4
-    try {
-        consumer.commitSync();
-    } catch (CommitFailedException e) {
-        e.printStackTrace();
-    }
-}</code></pre>
-                    </section>
-                </section>
-
-                <section>
-                    <h2>STEP_2_5</h2>
-                    <h3>Commit manuel asynchrone</h3>
-                    <section></section>
-                    <section>
-                        <p>Dans la boucle infinie, après l'affichage des messages renvoyés par la méthode <i>poll</i> :</p>
-                        <p>appler la méthode <i>manualAsynchronousCommit</i></p>
-                    </section>
-                    <section>
-                        <p>Dans la méthode <i>manualAsynchronousCommit</i></p>
-                        <p>Commiter les offsets des partitions consommées de manière asynchrone en appelant la méthode <i>commitAsync</i> du consumer.</p>
-                    </section>
-                    <section>
-                        <p>Passer en paramètre de la méthode <i>commitAsync</i> une lambda implémentant l'inteface <i>org.apache.kafka.clients.consumer.OffsetCommitCallback</i></p>
-                    </section>
-                    <section>
-                        <p>Dans cette classe/lambda vous devrez implémenter la méthode <i>onComplete</i> qui possède deux arguments : </p>
-                        <p><i>Map&lt;TopicPartition, OffsetAndMetadata&gt; offsets</i> qui renvoie des informations sur les offsets par partition en cas de succès</p>
-                        <p><i>Exception e</i> qui sera non null en cas d'erreur</p>
-                    </section>
-                    <section>
-                        <p>Afficher simplement la stacktrace en cas d'erreur</p>
-                        <p>Afficher dans la console les informations que vous jugerez pertinentes en cas de succès (offset, partition, topic...)</p>
-                    </section>
-                    <section>
-                        <h4>Implémentez la section 2_5</h4>
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>
-private static void manualAsynchronousCommit(KafkaConsumer&lt;String, String&gt; consumer) {
-    // TODO 2_5
-    consumer.commitAsync((offsets, exception) -> {
-        if (exception != null) {
-            exception.printStackTrace();
-        } else if (offsets != null) {
-            offsets.entrySet().stream().forEach(
-                entry -> {
-                    TopicPartition topicPartition = entry.getKey();
-                    OffsetAndMetadata offsetAndMetadata = entry.getValue();
-                    System.out.printf("commited offset %d for partition %d of topic %s%n",
-                    offsetAndMetadata.offset(), topicPartition.partition(), topicPartition.topic());
-                }
-            );
-        }
-    });
-}</code></pre>
-                    </section>
-                </section>
-
-                <section>
-                    <h2>STEP_2_6</h2>
-                    <h3>Consumer Group Rebalance</h3>
-                    <section></section>
-                    <section>
-                        <p>Il est possible de passer un argument supplémentaire à la méthode <i>subscribe</i> du consumer pour executer du code lorqu'un consumer se voit assigner ou revoquer une partition</p>
-                    </section>
-                    <section>
-                        <p>Créer une classe statique privée dans <i>JavaConsumer</i> implémentant l'interface <i>org.apache.kafka.clients.consumer.ConsumerRebalanceListener</i></p>
-                        <p>Dans la méthode <i>onPartitionsAssigned</i> afficher dans la console les partitions assignées</p>
-                        <p>Dans la méthode <i>onPartitionsRevoked</i> afficher dans la console les partitions revoquées</p>
-                    </section>
-                    <section>
-                        <p>Modifier l'appel à la méthode <i>subscribe</i> dans le <i>main</i> pour passer en second argument une instance de cette classe.</p>
-                    </section>
-                    <section>
-                        <h4>Implémentez la section 2_6</h4>
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>
-// TODO 2_6
-private static class HandleRebalance implements ConsumerRebalanceListener {
-    public void onPartitionsAssigned(Collection&lt;TopicPartition&gt; partitions) {
-        partitions.stream().forEach(
-            topicPartition ->
-            System.out.printf("Assigned partition %d of topic %s%n",
-            topicPartition.partition(), topicPartition.topic())
-        );
-    }
-
-    public void onPartitionsRevoked(Collection&lt;TopicPartition&gt; partitions) {
-        partitions.stream().forEach(
-            topicPartition ->
-            System.out.printf("Revoked partition %d of topic %s%n",
-            topicPartition.partition(), topicPartition.topic())
-        );
-    }
-}</code></pre>
-                    </section>
-                    <section>
-                        <p>Lancer un consumer -> il se voit attribuer les 4 partitions du topic</p>
-                    </section>
-                    <section>
-                        <p>Lancer un deuxième consumer -> chacun des consumers consomment deux partitions du topic</p>
-                    </section>
-                    <section>
-                        <p>Lancer un troisième consumer -> deux consumers consomment une partition. Le dernier en consomme deux.</p>
-                    </section>
-                    <section>
-                        <p>Lancer un quatrième consumer -> chacun des consumers consomment une partition du topic</p>
-                    </section>
-                    <section>
-                        <p>Lancer un cinquième consumer -> 4 consumers consomment une partition du topic. Le dernier ne fait rien.</p>
-                        <p>Le nombre de partition d'un topic determine le parallelisme maximal de consommation!</p>
-                    </section>
-                    <section>
-                        <p>Arreter tous vos consumers</p>
-                    </section>
-                    <section>
-                        <p>Lancer deux consumers : ils consomment chacun deux partitions</p>
-                    </section>
-                    <section>
-                        <p>Arreter un des deux consumers</p>
-                        <p>Le consumer restant reprend la consommation des deux partitions consommées par le consumer arrêté...</p>
-                        <p>Au bout de 30s par défaut... c'est long</p>
-                    </section>
-                    <section>
-                        <p>C'est dû à la valeur de la property <i>session.timeout.ms</i></p>
-                        <p>Elle détermine le temps en millisecondes pendant lequel un consommateur qui a perdu contact avec les brokers Kafka est toujours considérer comme "vivant"</p>
-                        <p>Valeur par défaut 30000</p>
-                    </section>
-                    <section>
-                        <p>En appelant la méthode <i>close</i> sur un consumer on libère immédiatement les partitions qui lui été assignées et on provoque un rebalance</p>
-                    </section>
-                    <section>
-                        <p>Copier ce shutdownhook dans la méthode <i>main</i> après la création du consumer</p>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>
-final Thread mainThread = Thread.currentThread();
-
-Runtime.getRuntime().addShutdownHook(new Thread() {
-    public void run() {
-        System.out.println("Starting exit...");
-        // Note that shutdownhook runs in a separate thread, so the only thing we can safely do to a consumer is wake it up
-        consumer.wakeup();
-        try {
-            mainThread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-});</code></pre>
-                    </section>
-                    <section>
-                        <p>Ce shutdownhook va provoquer une WakeupException dans notre boucle infinie avant l'arrêt de notre application</p>
-                        <p>La clause finally de notre méthode main va appeler la méthode <i>close</i> sur notre consumer</p>
-                    </section>
-                    <section>
-                        <p>Lancer à nouveau deux consumers</p>
-                        <p>Stopper un des deux consumers</p>
-                        <p>Le rebalance est immédiat!</p>
-                    </section>
-                </section>
-
-                <section>
-                    <h2>STEP_3</h2>
-                    <h3>Batch consumer</h3>
-                    <section data-background="img/K48x3A2pHglFK.gif"></section>
-                    <section>
-                        <p>Nous allons coder un consommateur Kafka en mode batch à l'aide de la nouvelle API introduite avec la version 0.9.</p>
-                    </section>
-                    <section>
-                        <p>Cette fois, nous allons travailler sur la classe <i>fr.xebia.devoxx.kafka.BatchConsumer</i>.</p>
-                    </section>
-                    <section>
-                        <p>Créer un job avec ce consommateur depuis Kafka consiste à :
-                        <ol>
-                            <li>Configurer et instancier un <i>KafkaConsumer</i></li>
-                            <li>Assigner les partitions du topic à ce consumer</li>
-                            <li>Assigner un offset pour chaque partition consommée</li>
-                            <li>Obtenir des messages de type <i>ConsumerRecords</i> des partitions</li>
-                        </ol>
-                        </p>
-                    </section>
-                    <section>
-                        <p>Pour se faire, vous allez devoir suivre les 4 TODOs de la classes <i>fr.xebia.devoxx.kafka.BatchConsumer</i> en suivant les étapes décrites si dessous.</p>
-                        <p>Cette classe est une classe exécutable que vous pouvez lancer depuis Eclipse ou IntelliJ.</p>
-                    </section>
-                </section>
-
-                <section>
-                    <h2>STEP_3_1</h2>
-                    <h3>Instanciation d'un KafkaConsumer</h3>
-                    <section></section>
-                    <section>
-                        <p>Instancier un <i>org.apache.kafka.clients.consumer.KafkaConsumer&lt;K, V&gt;</i> dans la méthode <i>createKafkaConsumer</i>.</p>
-                    </section>
-                    <section>
-                        <p>Pas besoin de commiter les offsets ici : mettre la valeur de la property enable.auto.commit à false</p>
-                    </section>
-                    <section>
-                        <h4>Implémentez la section 3_1</h4>
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>
-private static KafkaConsumer&lt;String, String&gt; createKafkaConsumer() {
-    // TODO 3_1
-    Map&lt;String, Object&gt; props = new HashMap<>();
-    // required properties
-
-    props.put("bootstrap.servers", "localhost:9092,localhost:9093");
-    props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-    props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-    props.put("enable.auto.commit", "false");
-
-    return new KafkaConsumer<>(props);
-}</code></pre>
-                    </section>
-                </section>
-
-                <section>
-                    <h2>STEP_3_2</h2>
-                    <h3>Assigner les partitions du topic à ce consumer</h3>
-                    <section></section>
-                    <section>
-                        <p>Ici nous utiliserons une seul instance de ce batch consumer</p>
-                        <p>Nul besoin de groupe de consommation ou de rebalance</p>
-                        <p>Nous allons assigner les partitions consommées par ce job manuellement</p>
-                    </section>
-                    <section>
-                        <p>Dans la methode <i>assignPartitions</i> : récupérer la liste des partitions du topic devoxx à l'aide de la méthode <i>partitionsFor</i> du consumer</p>
-                        <p>Transformer cette liste de <i>PartitionInfo</i> en une liste de <i>TopicPartition</i></p>
-                        <p>assigne la liste de <i>TopicPartition</i> au consumer à l'aide de la méthode <i>assign</i> </p>
-                    </section>
-                    <section>
-                        <h4>Implémentez la section 3_2</h4>
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>
-private static void assignPartitions(KafkaConsumer&lt;String, String&gt; consumer) {
-    // TODO 3_2
-    List&lt;PartitionInfo&gt; partitionInfos = consumer.partitionsFor("devoxx");
-    List&lt;TopicPartition&gt; topicPartitions =  partitionInfos.stream()
-    .map(partitionInfo -> new TopicPartition("devoxx", partitionInfo.partition()))
-    .collect(Collectors.toList());
-
-    System.out.println(topicPartitions);
-    consumer.assign(topicPartitions);
-}</code></pre>
-                    </section>
-                </section>
-
-                <section>
-                    <h2>STEP_3_3</h2>
-                    <h3>Assigner un offset pour chaque partition consommée</h3>
-                    <section></section>
-                    <section>
-                        <p>Dans la methode <i>seek</i> : assigner aux consumers l'offset du premier message pour chaque partition</p>
-                        <p>Chercher la méthode apropriée de l'objet consumer...</p>
-                    </section>
-                    <section>
-                        <h4>Implémentez la section 3_3</h4>
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>
-private static void seek(KafkaConsumer&lt;String, String&gt; consumer) {
-    // TODO 3_3
-    consumer.seekToBeginning();
-}</code></pre>
-                    </section>
-                </section>
-
-                <section>
-                    <h2>STEP_3_4</h2>
-                    <h3>Consommer les messages</h3>
-                    <section></section>
-                    <section>
-                        <h4>Implémentez la section 3_4</h4>
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>
-private static void process(KafkaConsumer&lt;String, String&gt; consumer) {
-    // TODO 3_4
-    ConsumerRecords&lt;String, String&gt; records = consumer.poll(1000);
-    while (!records.isEmpty()) {
-        for (ConsumerRecord&lt;String, String&gt; record : records) {
-            System.out.println(String.format("topic = %s, partition: %d, offset: %d: %s", record.topic(), record.partition(),
-            record.offset(), record.value()));
-        }
-        records = consumer.poll(1000);
-    }
-}</code></pre>
-                    </section>
-                    <section>
-                        <p>Lancer la class <i>BatchConsumer</i></p>
-                        <p>Constater que c'est tout de même assez rapide, même dans des conditions de développement</p>
-                    </section>
-                </section>
-
-                <section>
-                    <h2>STEP_4</h2>
-                    <h3>Kafka Connect</h3>
-                    <section data-background="img/xTiTnDhp65BN2Ns3Go.gif"></section>
-                    <section></section>
-                    <section>
-                        <p>Kafka Connect permet de créer des connecteurs entre Kafka et des systèmes de données.</p>
-                        <p>Il existe dès aujourd'hui un certain nombre de connecteurs développés par la communauté :</p>
-                    </section>
-                    <section>
-                        <p>
-                        <ul>
-                            <li>HDFS</li>
-                            <li>JDBC</li>
-                            <li>ElasticSearch</li>
-                            <li>Cassandra</li>
-                            <li>MySQL</li>
-                            <li>...</li>
-                            <li>voir : <a href="http://www.confluent.io/developers/connectors">Kafka Connector Hub</a></li>
-                        </ul></p>
-                        <p>Kafka Connect ne fait qu'un seule chose : envoyer des données depuis ou vers Kafka.</p>
-                    </section>
-                    <section>
-                        <p>Dans la plupart des cas, il ne sera pas nécessaire d'écrire du code spécifique pour envoyer des données vers Kafka</p>
-                        <p>Il vous suffira de persister les données crées par votre système dans votre base de données/système de données préféré</p>
-                        <p>Et de configurer et lancer le connecteur Kafka aproprié pour envoyer ces données dans un topic Kafka.</p>
-                    </section>
-                    <section>
-                        <p>Nous allons envoyer des donneés vers Kafka depuis un système de données qui sera ici un simple fichier texte.</p>
-                    </section>
-                    <section>
-                        <p>Commencer par créer un nouveau topic devoxx-connect.</p>
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>
-./bin/kafka-topics.sh --create --topic devoxx-connect \
---partition 4 --replication-factor 2 --zookeeper 127.0.0.1:2181</code></pre>
-                    </section>
-                    <section>
-                        <p>A la racine de votre installation de Kafka : créer un fichier best-db-ever.txt</p>
-                        <p>Puis un deuxième fichier : second-best-db-ever.txt</p>
-                    </section>
-                    <section>
-                        <p>dans un terminal lancer la commande : </p>
-                        <p><pre><code class="hljs" data-trim>tail -f second-best-db-ever.txt</code></pre></p>
-                    </section>
-                    <section>
-                        <p>Nous allons lancer le service Kafka Connect en mode standalone avec deux connecteurs</p>
-                        <p>Un premier qui va "écouter" les messages envoyés à notre première base de données (les lignes de notre fichier texte) et envoyer ces messages dans le topic devoxx-connect</p>
-                        <p>Un deuxième qui va consommer les messages du topic devoxx-connect et les envoyer à notre deuxième base de données (écrire un ligne par message dans le fichier texte)</p>
-                    </section>
-                    <section>
-                        <p>La configuration du service Kafka Connect sera le fichier config/connect-standalone.properties</p>
-                        <p>Modifier les valeurs des properties key.converter et value.converter en :</p>
-                        <p><pre><code class="hljs" data-trim>org.apache.kafka.connect.storage.StringConverter</code></pre></p>
-                    </section>
-                    <section>
-                        <p>Nous utiliserons le fichier config/connect-file-source.properties pour le premier connecteur</p>
-                        <p>Nous utiliserons le fichier config/connect-file-sink.properties pour le second connecteur</p>
-                    </section>
-                    <section>
-                        <p>Modifier les properties de ces fichiers pour lire les données de best-db-ever.txt et les envoyer vers second-best-db-ever.txt en passant par le topic Kafka devoxx-connect</p>
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
-                        <p>connect-file-source.properties</p>
-                        <p><pre><code class="hljs" data-trim>name=local-file-source
-connector.class=org.apache.kafka.connect.file.FileStreamSourceConnector
-tasks.max=1
-file=best-db-ever.txt
-topic=devoxx-connect</code></pre></p>
-                    </section>
-                    <section>
-                        <p>connect-file-sink.properties</p>
-                        <p><pre><code class="hljs" data-trim>name=local-file-sink
-connector.class=org.apache.kafka.connect.file.FileStreamSinkConnector
-tasks.max=1
-file=second-best-db-ever.txt
-topics=devoxx-connect</code></pre></p>
-                    </section>
-                    <section>
-                        <p>Lancer le service Kafka Connect</p>
-                        <p><pre><code class="hljs" data-trim>./bin/connect-standalone.sh config/connect-standalone.properties \
-config/connect-file-source.properties config/connect-file-sink.properties</code></pre></p>
-                    </section>
-                    <section>
-                        <p>Ecrire des lignes dans le fichier best-db-ever.txt</p>
-                        <p>Elles sont automatiquement répliquées dans le fichier second-best-db-ever.txt!</p>
-                    </section>
-                    <section>
-                        <p>Attention le premier connecteur se base sur le byte offset du fichier texte pour détecter des nouveaux messages.</p>
-                        <p>N'ecrire qu'à la fin de votre fichier!</p>
-                    </section>
-                    <section>
-                        <p>Kafka Connect permet ainsi de facilement mettre à disposition le flux de modification d'un système de données
-                            à tous les acteurs de votre data center, sans créer de connections point à point entre votre système source et vos sytèmes cibles.</p>
-                    </section>
-                </section>
-
-                <section>
-                    <h2>STEP_5</h2>
-                    <h3>Kafka Streams</h3>
-                    <section data-background="img/YotKRfokBujGE.gif"></section>
-                    <section></section>
-                    <section>
-                        <p>Nouveauté de la version 0.10.0.0 de Kafka</p>
-                        <p>Kafka Streams est une librairie permettant d'analyser et de transformer les flux de données persistées dans Kafka</p>
-                    </section>
-                    <section>
-                        <p>Simple et legère cette librairie vous permet de facilement créer un job de stream processing sans sortir l'artillerie lourde de type Spark ou Storm...</p>
-                        <p>Seule contrainte : elle ne sait lire/ecrire des données que depuis et vers Kafka</p>
-                    </section>
-                    <section>
-                        <p>Commençons par créer un stream processing très simple qui va légerement modifier nos messages provenant de notre base de données crée dans l'exercice précedent</p>
-                        <p>Cette fois, nous allons travailler sur la classe <i>fr.xebia.devoxx.kafka.SimpleKafkaStream</i>.</p>
-                    </section>
-                </section>
-
-                <section>
-                    <h2>STEP_5_1</h2>
-                    <h3>Créer un KStreamBuilder</h3>
-                    <section></section>
-                    <section><p>Créer simplement une instance de <i>org.apache.kafka.streams.kstream.KStreamBuilder</i></p></section>
-                    <section>
-                        <h4>Implémentez la section 5_1</h4>
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>KStreamBuilder kStreamBuilder = new KStreamBuilder();</code></pre>
-                    </section>
-                </section>
-
-                <section>
-                    <h2>STEP_5_2</h2>
-                    <h3>Créer un KStream</h3>
-                    <section></section>
-                    <section><p>Créer un KStream, flux des données du topic Kafka "devoxx-connect" à l'aide de la méthode <i>stream</i> du <i>kStreamBuilder</i></section>
-                    <section>
-                        <h4>Implémentez la section 5_2</h4>
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>KStream&lt;String, String&gt; source = kStreamBuilder.stream("devoxx-connect");</code></pre>
-                    </section>
-                </section>
-
-                <section>
-                    <h2>STEP_5_3</h2>
-                    <h3>Transformer les messages du stream</h3>
-                    <section></section>
-                    <section>
-                        <p>Créer un nouveau KStream en appelant la méthode <i>map</i> sur le stream précedent</p>
-                        <p>Modifier la valeur des messages en prefixant celle-ci par "STREAM : "</p>
-                    </section>
-                    <section>
-                        <h4>Implémentez la section 5_3</h4>
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>KStream&lt;String, String&gt; sink = source.map((key, value) -> new KeyValue<>(key, "STREAM : " + value));</code></pre>
-                    </section>
-                </section>
-
-                <section>
-                    <h2>STEP_5_4</h2>
-                    <h3>Envoyer les messages transformés dans un nouveau topic</h3>
-                    <section></section>
-                    <section>
-                        <p>Envoyer les messages du stream précédent dans le topic "devoxx-streams-out" en appelant la méthode <i>to</i> sur le kStream</p>
-                    </section>
-                    <section>
-                        <h4>Implémentez la section 5_4</h4>
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>sink.to("devoxx-streams-out");</code></pre>
-                    </section>
-                </section>
-
-                <section>
-                    <h2>STEP_5_5</h2>
-                    <h3>Créer un KafkaStreams</h3>
-                    <section></section>
-                    <section>
-                        <p>Créer un objet de type <i>org.apache.kafka.streams.KafkaStreams</i> en passant en arguments du constructeur le kStreamBuilder et un objet Properties de configuration</p>
-                    </section>
-                    <section>
-                        <p>Dans l'objet Properties, vous devrez configurer les properties possédant les clés suivantes :</p>
-                        <ul>
-                            <li>StreamsConfig.JOB_ID_CONFIG</li>
-                            <li>StreamsConfig.BOOTSTRAP_SERVERS_CONFIG</li>
-                            <li>StreamsConfig.ZOOKEEPER_CONNECT_CONFIG</li>
-                            <li>StreamsConfig.KEY_SERIALIZER_CLASS_CONFIG</li>
-                            <li>StreamsConfig.VALUE_SERIALIZER_CLASS_CONFIG</li>
-                            <li>StreamsConfig.KEY_DESERIALIZER_CLASS_CONFIG</li>
-                            <li>StreamsConfig.VALUE_DESERIALIZER_CLASS_CONFIG</li>
-                        </ul>
-                    </section>
-                    <section>
-                        <h4>Implémentez la section 5_5</h4>
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>Properties props = new Properties();
-        props.put(StreamsConfig.JOB_ID_CONFIG, "streams-wordcount");
-        props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092,localhost:9093");
-        props.put(StreamsConfig.ZOOKEEPER_CONNECT_CONFIG, "localhost:2181");
-        props.put(StreamsConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        props.put(StreamsConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        props.put(StreamsConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(StreamsConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-
-        KafkaStreams kafkaStreams = new KafkaStreams(kStreamBuilder, props);</code></pre>
-                    </section>
-                </section>
-
-                <section>
-                    <h2>STEP_5_6</h2>
-                    <h3>Démarrer le KafkaStreams</h3>
-                    <section></section>
-                    <section>
-                        <p>Pour démarrer le KafkaStreams appeler simplement sa méthode <i>start</i></p>
-                    </section>
-                    <section>
-                        <h4>Implémentez la section 5_5</h4>
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>kafkaStreams.start();</code></pre>
-                    </section>
-                    <section>
-                        <p>modifier la configuration du fichier config/connect-file-sink.properties pour écouter les messages du topic devoxx-streams-out</p>
-                        <p>relancer le service KafkaConnect</p>
-                    </section>
-                    <section>
-                        <p>Lancer la classe <i>SimpleKafkaStream</i></p>
-                    </section>
-                    <section>
-                        <p>Ecrire des lignes dans le fichier best-db-ever.txt</p>
-                        <p>Elles sont automatiquement répliquées dans le fichier second-best-db-ever.txt avec une petite transformation apportée par notr KafkaStream!</p>
-                    </section>
-                </section>
-
-                <section>
-                    <h2>Step 6</h2>
-                    <h3>Bonus : Spark Streaming Client</h3>
-                    <section data-background="img/bbV0dIIjL0rgA.gif"></section>
-                    <section>
-                        <p>Nous allons maintenant consommer les messages en streaming presque temps réel.</p>
-                    </section>
-                    <section>
-                        <p>Spark est un framework de calcul distribué de données et propose une fonctionnalité
-                            de traitement en micro-batch simulant du temps réel : Spark Streaming. Nous allons
-                            coder un batch Spark Streaming récupérant les données de notre cluster Kafka.</p>
-                    </section>
-                    <section>
-                        <p>Développons un traitement qui analysera la charge moyenne de CPU des 5
-                            dernières secondes.</p>
-                    </section>
-                </section>
-
-                <section>
-                    <h2>Step 6_1</h2>
-                    <section></section>
-                    <section>
-                        <p>Nous allons commencer par créer un context de streaming spark.</p>
-                        <p>Vous aurez également besoin d'instancier une configuration Spark.
-                            Le "master" de cette configuration doit être "local[2]" afin de
-                            faire fonctionner Spark sur votre machine.</p>
-                    </section>
-                    <section>
-                        <h4>Indice</h4>
-                    </section>
-                    <section>
-                        <p>Instancier la classe org.apache.spark.streaming.api.java.JavaStreamingContext</p>
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>
-SparkConf conf = new SparkConf()
-    .setMaster("local[2]")
-    .setAppName("streaming-client");
-
-return new JavaStreamingContext(conf, Durations.seconds(5));
-                        </code></pre>
-                    </section>
-                </section>
-
-                <section>
-                    <h2>Step 6_2</h2>
-                    <section></section>
-                    <section>
-                        <p>Nous allons maintenant créer le stream de données.</p>
-                        <p>Regarder du côter de la classe org.apache.spark.streaming.kafka.KafkaUtils</p>
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>
-Map&lt;String, Integer> topics = new HashMap<>();
-topics.put("handsonkafka", 4);
-
-return KafkaUtils.createStream(context, "localhost:2181", "streaming-client", topics);
-                        </code></pre>
-                    </section>
-                </section>
-
-                <section>
-                    <h2>Step 6_3</h2>
-                    <section></section>
-                    <section>
-                        <p>La dernière étape consiste à traiter les données que l'on reçoit.
-                            Nous allons donc travailler sur le stream de données.</p>
-                    </section>
-                    <section>
-                        <h4>Indices</h4>
-                    </section>
-                    <section>
-                        Le stream contient des tuples clés/valeurs. Nous ne nous intéresserons ici qu'aux valeurs.
-                    </section>
-                    <section>
-                        La fonction "map" d'un stream applique une transformation sur le stream de données.
-                    </section>
-                    <section>
-                        Spark travaille sur un concept de RDD (Resillient Distributed DataSet) qui est une collection
-                        d'objets distribuée. La fonction "foreachRDD" permet d'appliquer une fonction qui ait
-                        besoin de tous les éléments de la collection.
-                    </section>
-                    <section>
-                        <h4>Solution</h4>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>
-stream.map(v1 -> extractValueFromRecord(v1._2()))
-    .foreachRDD(JavaConsumerStream::displayAvg);
-
-context.start();
-context.awaitTermination();
-                        </code></pre>
-                    </section>
-                </section>
-
-                <section>
-                    <h2>SUMMARY</h2>
-                    <section></section>
-                    <section>
-                        <p>Nous avons vu ensemble:<ul>
-                            <li>les rôles de Kafka et Zookeeper</li>
-                            <li>comment créer des topics et partitions</li>
-                            <li>comment produire et consommer de la données</li>
-                            <li>l'utilisation de Kafka Connect et Kafka Streams</li>
-                    </ul></p>
-                    </section>
-                    <section>
-                        <p>Pour résumer, Kafka est un journal de log distribué, hautement disponible et performant.</p>
-                        <p>Cette solution peut vraiment être considérée comment une base de donneés.</p>
-                        <p>Son stockage de données est sûr et la persistence est au coeur même du système.</p>
-                    </section>
-                    <section>
-                        <p>Ces caractéristiques en font aujourd'hui une plateforme incontournable dans l'univers BigData.</p>
-                    </section>
-                    <section>
-                        <p>N'utilisez pas Kafka comme on utilise RabbitMQ, Kafka n'est pas un broker JMS.</p>
-                    </section>
-                    <section>
-                        <p>Jetez un oeil à Confluent.io</p>
-                    </section>
-                </section>
-                
-                
-                <section>
-                    <h1>Merci</h1>
-                </section>
-
-                
-                
-            </div>
-		</div>
-
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
-
-		<script>
-
-			// Full list of configuration options available at:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
-
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
-
-
-				// Optional reveal.js plugins
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true }
-				]
-			});
-
-		</script>
-
-	</body>
+</body>
 </html>

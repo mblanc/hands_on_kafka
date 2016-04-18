@@ -302,7 +302,7 @@ cat /tmp/kafka-logs-*/devoxx-*/*.log
                         </p>
                     </section>
                     <section>
-                        <p>Pour se faire, vous allez devoir suivre les 4 TODOs de la classes <i>fr.xebia.devoxx.kafka.JavaProducer</i> en suivant les étapes décrites si dessous.</p>
+                        <p>Pour se faire, vous allez devoir suivre les 4 TODOs de la classes <i>fr.xebia.devoxx.kafka.ScalaProducer</i> en suivant les étapes décrites si dessous.</p>
                         <p>Cette classe est une classe exécutable que vous pouvez lancer depuis Eclipse ou IntelliJ.</p>
                     </section>
                 </section>
@@ -313,7 +313,7 @@ cat /tmp/kafka-logs-*/devoxx-*/*.log
                     <h3>Instanciation d'un KafkaProducer</h3>
                     <section></section>
                     <section>
-                        <p>Instancier un <i>org.apache.kafka.clients.producer.KafkaProducer&lt;K, V&gt;</i> dans la méthode <i>createKafkaProducer</i>.</p>
+                        <p>Instancier un <i>org.apache.kafka.clients.producer.KafkaProducer[K, V]</i> dans la méthode <i>createKafkaProducer</i>.</p>
                     </section>
                     <section>
                         <p>Un producer a besoin d'une Map de propriétés</p>
@@ -343,13 +343,15 @@ cat /tmp/kafka-logs-*/devoxx-*/*.log
                     </section>
                     <section>
                         <pre><code class="hljs" data-trim>
-Map&lt;String, Object&gt; props = new HashMap&lt;&gt;();
-props.put("bootstrap.servers", "localhost:9092,localhost:9093");
-props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-
-return new KafkaProducer&lt;&gt;(props);
-                        </code></pre>
+private def createKafkaProducer(): KafkaProducer[String, String] = {
+    import scala.collection.JavaConversions._
+    val props = Map(
+    "bootstrap.servers" -> "localhost:9092,localhost:9093",
+    "value.serializer" -> "org.apache.kafka.common.serialization.StringSerializer",
+    "key.serializer" -> "org.apache.kafka.common.serialization.StringSerializer"
+    )
+    new KafkaProducer[String, String](props)
+}</code></pre>
                     </section>
                 </section>
                 
@@ -359,17 +361,17 @@ return new KafkaProducer&lt;&gt;(props);
                     <h3>Écriture dans le topic</h3>
                     <section></section>
                     <section>
-                        <p>Explorez l'API de <i>KafkaProducer</i> et <i>ProducerRecord</i> et envoyez un message (<i>ProducerRecord&lt;K, V&gt;</i>) sur le topic <i>devoxx</i>.</p>
+                        <p>Explorez l'API de <i>KafkaProducer</i> et <i>ProducerRecord</i> et envoyez un message (<i>ProducerRecord[K, V]</i>) sur le topic <i>devoxx</i>.</p>
                     </section>
                     <section>
                         <p>Vous trouverez une méthode <i>produceData</i> qui produit un message avec le timestamp + la charge moyenne de votre machine.</p>
                     </section>
                     <section>
-                        <p>Dans la boucle infinie de la méthode <i>main</i> du JavaProducer : créer un <i>ProducerRecord&lt;String, String&gt;</i> possédant uniquement une valeur (pas de clé) générée à l'aide de la méthode <i>produceData</i></p>
+                        <p>Dans la boucle infinie de la méthode <i>main</i> du ScalaProducer : créer un <i>ProducerRecord[String, String]</i> possédant uniquement une valeur (pas de clé) générée à l'aide de la méthode <i>produceData</i></p>
                         <p>Appeler ensuite la méthode <i>fireAndForget</i> en passant en paramètres le <i>KafkaProducer</i> et le <i>ProducerRecord</i>.</p>
                     </section>
                     <section>
-                        <p>Dans la méthode <i>fireAndForget</i> du JavaProducer : envoyer le message aux brokers Kafka de manière asynchrone et sans callback.</p>
+                        <p>Dans la méthode <i>fireAndForget</i> du ScalaProducer : envoyer le message aux brokers Kafka de manière asynchrone et sans callback.</p>
                     </section>
                     <section>
                         <h4>Implémentez la section 1_2</h4>
@@ -379,37 +381,36 @@ return new KafkaProducer&lt;&gt;(props);
                     </section>
                     <section>
                         <pre><code class="hljs" data-trim>
-public static void main(String[] args) throws ExecutionException, InterruptedException {
+def main(args: Array[String]) {
     // instanciation du KafkaProducer
-    KafkaProducer&lt;String, String&gt; producer = createKafkaProducer();
+    val producer = createKafkaProducer()
 
     // écriture
     while (true) {
-        // TODO 1_2
-        String message = produceData();
-        ProducerRecord&lt;String, String&gt; record = new ProducerRecord<>("devoxx", message);
-        fireAndForget(producer, record);
-        Thread.sleep(1000);
+        val message: String = produceData()
+        val record: ProducerRecord[String, String] = new ProducerRecord[String, String]("devoxx", message)
+        fireAndForget(producer, record)
+        Thread.sleep(1000)
     }
 }</code></pre>
                     </section>
                     <section>
                         <pre><code class="hljs" data-trim>
-private static void fireAndForget(KafkaProducer&lt;String, String&gt; producer, ProducerRecord&lt;String, String&gt; record) {
-    // TODO 1_2
+private def fireAndForget(producer: KafkaProducer[String, String], record: ProducerRecord[String, String]) {
     try {
-        producer.send(record);
-    } catch (Exception e) {
+        producer.send(record)
+    } catch {
+        case e: Exception =>
         // only catch exception before sending message
-        e.printStackTrace();
+        e.printStackTrace()
     }
 }</code></pre>
                     </section>
                     <section>
-                        <p>Vous pouvez lancer la classe JavaProducer</p>
+                        <p>Vous pouvez lancer la classe ScalaProducer</p>
                     </section>
                     <section>
-                        <p>Vérifier que le kafka-console-consumer lancé dans l'exercice précédent reçoit bien les messages envoyés par notre JavaProducer</p>
+                        <p>Vérifier que le kafka-console-consumer lancé dans l'exercice précédent reçoit bien les messages envoyés par notre ScalaProducer</p>
                         <pre><code class="hljs" data-trim>
 2015-10-20T16:11:17.412Z: avg_load: 2.81005859375
 2015-10-20T16:11:18.934Z: avg_load: 2.81005859375
@@ -431,10 +432,10 @@ private static void fireAndForget(KafkaProducer&lt;String, String&gt; producer, 
                         <p>La méthode send du <i>KafkaProducer</i> renvoit une Future</p>
                     </section>
                     <section>
-                        <p>Dans la boucle infinie de la méthode <i>main</i> du JavaProducer : Modifier l'appel à <i>fireAndForget</i> par un appel à <i>sendSynchronously</i></p>
+                        <p>Dans la boucle infinie de la méthode <i>main</i> du ScalaProducer : Modifier l'appel à <i>fireAndForget</i> par un appel à <i>sendSynchronously</i></p>
                     </section>
                     <section>
-                        <p>Dans la méthode <i>sendSynchronously</i> du JavaProducer : envoyer le message aux brokers Kafka de manière synchrone en bloquant sur la future à l'aide de la méthode <i>get()</i>.</p>
+                        <p>Dans la méthode <i>sendSynchronously</i> du ScalaProducer : envoyer le message aux brokers Kafka de manière synchrone en bloquant sur la future à l'aide de la méthode <i>get()</i>.</p>
                     </section>
                     <section>
                         <h4>Implémentez la section 1_3</h4>
@@ -444,13 +445,13 @@ private static void fireAndForget(KafkaProducer&lt;String, String&gt; producer, 
                     </section>
                     <section>
                         <pre><code class="hljs" data-trim>
-private static void sendSynchronously(KafkaProducer&lt;String, String&gt; producer, ProducerRecord&lt;String, String&gt; record) {
-    // TODO 1_3
+private def sendSynchronously(producer: KafkaProducer[String, String], record: ProducerRecord[String, String]) {
     try {
-        producer.send(record).get();
-    } catch (Exception e) {
+        producer.send(record).get
+    } catch {
+        case e: Exception =>
         // catch all exceptions
-        e.printStackTrace();
+        e.printStackTrace()
     }
 }</code></pre>
                     </section>
@@ -464,7 +465,7 @@ private static void sendSynchronously(KafkaProducer&lt;String, String&gt; produc
                         <p>Il est possible d'envoyer des messages auxx brokers Kafka de manière asynchrone et d'impléménter une méthode de callback qui sera appelée lorsque les brokers Kafka se seront acquitté de l'écriture du message.</p>
                     </section>
                     <section>
-                        <p>Dans la boucle infinie de la méthode <i>main</i> du <i>JavaProducer</i> : Modifier l'appel à <i>sendSynchronously</i> par un appel à <i>sendAsynchronously</i></p>
+                        <p>Dans la boucle infinie de la méthode <i>main</i> du <i>ScalaProducer</i> : Modifier l'appel à <i>sendSynchronously</i> par un appel à <i>sendAsynchronously</i></p>
                     </section>
                     <section>
                         <p>Ecrire une classe <i>DemoProducerCallback</i> qui implémente l'interface <i>org.apache.kafka.clients.producer.Callback</i>.</p>
@@ -479,7 +480,7 @@ private static void sendSynchronously(KafkaProducer&lt;String, String&gt; produc
                         <p>Afficher dans la console les informations que vous jugerez pertinentes en cas de succès (offset, partition, topic...)</p>
                     </section>
                     <section>
-                        <p>Dans la méthode <i>sendAsynchronously</i> du <i>JavaProducer</i> : envoyer le message aux brokers Kafka de manière asynchrone en passant en paramètre une instance de <i>DemoProducerCallback</i>.</p>
+                        <p>Dans la méthode <i>sendAsynchronously</i> du <i>ScalaProducer</i> : envoyer le message aux brokers Kafka de manière asynchrone en passant en paramètre une instance de <i>DemoProducerCallback</i>.</p>
                     </section>
                     <section>
                         <h4>Implémentez la section 1_4</h4>
@@ -489,54 +490,23 @@ private static void sendSynchronously(KafkaProducer&lt;String, String&gt; produc
                     </section>
                     <section>
                         <pre><code class="hljs" data-trim>
-// TODO 1_4
-private static class DemoProducerCallback implements Callback {
-    @Override
-    public void onCompletion(RecordMetadata recordMetadata, Exception e) {
+private def sendAsynchronously(producer: KafkaProducer[String, String], record: ProducerRecord[String, String]) {
+    producer.send(record, new DemoProducerCallback())
+}</code></pre>
+                    </section>
+                    <section>
+                        <pre><code class="hljs" data-trim>
+class DemoProducerCallback extends Callback {
+    def onCompletion(recordMetadata: RecordMetadata, e: Exception) {
         if (e != null) {
-            // catch message send
-            e.printStackTrace();
+            e.printStackTrace()
         } else if (recordMetadata != null) {
-            System.out.printf("message %d sent to partition %d of topic %s%n",
-            recordMetadata.offset(), recordMetadata.partition(), recordMetadata.topic());
+            println(s"message ${recordMetadata.offset} sent to partition ${recordMetadata.partition} of topic ${recordMetadata.topic}")
         }
     }
-}</code></pre>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>
-private static void sendAsynchronously(KafkaProducer&lt;String, String&gt; producer, ProducerRecord&lt;String, String&gt; record) {
-    // TODO 1_4
-    try {
-        producer.send(record, new DemoProducerCallback());
-    } catch (Exception e) {
-        // only catch exception before sending message
-        e.printStackTrace();
-    }
-}</code></pre>
-                    </section>
-                    <section>
-                        <h4>OU</h4>
-                    </section>
-                    <section>
-                        <pre><code class="hljs" data-trim>
-private static void sendAsynchronously(KafkaProducer&lt;String, String&gt; producer, ProducerRecord&lt;String, String&gt; record) {
-    // TODO 1_4
-    producer.send(record,
-    (recordMetadata, e) -> {
-        if (e != null) {
-            e.printStackTrace();
-        } else {
-            System.out.printf("message %d sent to partition %d of topic %s%n",
-            recordMetadata.offset(), recordMetadata.partition(), recordMetadata.topic());
-        }
-    });
 }</code></pre>
                     </section>
                 </section>
-
-                
-                
                 
                 <section>
                     <h2>STEP_2</h2>
@@ -546,7 +516,7 @@ private static void sendAsynchronously(KafkaProducer&lt;String, String&gt; produ
                         <p>En suivant la même démarche, nous allons coder un consommateur Kafka à l'aide de la nouvelle API introduite avec la version 0.9.</p>
                     </section>
                     <section>
-                        <p>Cette fois, nous allons travailler sur la classe <i>fr.xebia.devoxx.kafka.JavaConsumer</i>.</p>
+                        <p>Cette fois, nous allons travailler sur la classe <i>fr.xebia.devoxx.kafka.ScalaConsumer</i>.</p>
                     </section>
                     <section>
                         <p>Lire avec ce consommateur depuis Kafka consiste à :
@@ -559,7 +529,7 @@ private static void sendAsynchronously(KafkaProducer&lt;String, String&gt; produ
                         </p>
                     </section>
                     <section>
-                        <p>Pour se faire, vous allez devoir suivre les 6 TODOs de la classes <i>fr.xebia.devoxx.kafka.JavaConsumer</i> en suivant les étapes décrites si dessous.</p>
+                        <p>Pour se faire, vous allez devoir suivre les 6 TODOs de la classes <i>fr.xebia.devoxx.kafka.ScalaConsumer</i> en suivant les étapes décrites si dessous.</p>
                         <p>Cette classe est une classe exécutable que vous pouvez lancer depuis Eclipse ou IntelliJ.</p>
                     </section>
                 </section>
@@ -570,7 +540,7 @@ private static void sendAsynchronously(KafkaProducer&lt;String, String&gt; produ
                     <h3>Instanciation d'un KafkaConsumer</h3>
                     <section></section>
                     <section>
-                        <p>Instancier un <i>org.apache.kafka.clients.consumer.KafkaConsumer&lt;K, V&gt;</i> dans la méthode <i>createKafkaConsumer</i>.</p>
+                        <p>Instancier un <i>org.apache.kafka.clients.consumer.KafkaConsumer[K, V]</i> dans la méthode <i>createKafkaConsumer</i>.</p>
                     </section>
                     <section>
                         <p>Un consumer a besoin d'une Map de propriétés</p>
@@ -602,18 +572,15 @@ private static void sendAsynchronously(KafkaProducer&lt;String, String&gt; produ
                     </section>
                     <section>
                         <pre><code class="hljs" data-trim>
-private static KafkaConsumer&lt;String, String&gt; createKafkaConsumer() {
-    // TODO 2_1
-    Map&lt;String, Object&gt; props = new HashMap<>();
-    // required properties
-
-
-    props.put("bootstrap.servers", "localhost:9092,localhost:9093");
-    props.put("group.id", "whatever");
-    props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-    props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-
-    return new KafkaConsumer<>(props);
+private def createKafkaConsumer(): KafkaConsumer[String, String] = {
+    import scala.collection.JavaConversions._
+    val props = Map(
+        "bootstrap.servers" -> "localhost:9092,localhost:9093",
+        "group.id" -> "whatever",
+        "key.deserializer" -> "org.apache.kafka.common.serialization.StringDeserializer",
+        "value.deserializer" -> "org.apache.kafka.common.serialization.StringDeserializer"
+    )
+    new KafkaConsumer[String, String](props)
 }</code></pre>
                     </section>
                 </section>
@@ -648,21 +615,22 @@ private static KafkaConsumer&lt;String, String&gt; createKafkaConsumer() {
                     </section>
                     <section>
                         <pre><code class="hljs" data-trim>
-public static void main(String[] args) {
+def main(args: Array[String]) {
+    import scala.collection.JavaConversions._
     //configuration d'un consumer
-    KafkaConsumer&lt;String, String&gt; consumer = createKafkaConsumer();
+    val consumer: KafkaConsumer[String, String] = createKafkaConsumer()
 
     // TODO 2_2
-    consumer.subscribe(Collections.singletonList("devoxx"));
+    consumer.subscribe(Collections.singletonList("devoxx"), new HandleRebalance())
     try {
         while (true) {
-            ConsumerRecords&lt;String, String&gt; consumerRecords = consumer.poll(100);
-            for (ConsumerRecord&lt;String, String&gt; consumerRecord : consumerRecords) {
-                display(consumerRecord);
+            val records: ConsumerRecords[String, String] = consumer.poll(1000)
+            for (record <- records) {
+                display(record)
             }
         }
     } finally {
-        consumer.close();
+        consumer.close()
     }
 }</code></pre>
                     </section>
@@ -703,40 +671,21 @@ public static void main(String[] args) {
                     </section>
                     <section>
                         <pre><code class="hljs" data-trim>
-private static KafkaConsumer&lt;String, String&gt; createKafkaConsumer() {
-    // TODO 2_1
-    Map&lt;String, Object&gt; props = new HashMap<>();
-    // required properties
-
-
-    props.put("bootstrap.servers", "localhost:9092,localhost:9093");
-    props.put("group.id", "test2");
-    props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-    props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-
-    // optional properties
-
-    // This parameter controls whether the consumer will commit offsets automatically
-    props.put("enable.auto.commit", "true");
-
-    // The frequency in milliseconds that the consumer offsets are auto-committed to Kafka if enable.auto.commit is set to true.
-    props.put("auto.commit.interval.ms", "5000");
-
-    // This property controls the behavior of the consumer when it starts reading a partition
-    // for which it doesn’t have a committed offset or if the committed offset it has is invalid
-    // earliest : automatically reset the offset to the earliest offset
-    // latest : automatically reset the offset to the latest offset
-    // none : throw exception to the consumer if no previous offset is found for the consumer's group
-    props.put("auto.offset.reset", "latest");
-
-    // Will be used by the brokers to identify messages sent from the client. It is used in logging, metrics and for quotas.
-    props.put("client.id", "");
-
-    return new KafkaConsumer<>(props);
+private def createKafkaConsumer(): KafkaConsumer[String, String] = {
+    import scala.collection.JavaConversions._
+    val props = Map(
+        "bootstrap.servers" -> "localhost:9092,localhost:9093",
+        "group.id" -> "whatever",
+        "key.deserializer" -> "org.apache.kafka.common.serialization.StringDeserializer",
+        "value.deserializer" -> "org.apache.kafka.common.serialization.StringDeserializer",
+        "enable.auto.commit" -> "true",
+        "auto.commit.interval.ms" -> "5000"
+    )
+    new KafkaConsumer[String, String](props)
 }</code></pre>
                     </section>
                     <section>
-                        <p>À ce stage, vous pouvez lancer la classe <i>fr.xebia.devoxx.kafka.JavaConsumer</i> et voir les messages envoyés par le producer.</p>
+                        <p>À ce stage, vous pouvez lancer la classe <i>fr.xebia.devoxx.kafka.ScalaConsumer</i> et voir les messages envoyés par le producer.</p>
                         <p>Vous pouvez donc fermer le consommateur en CLI.</p>
                     </section>
                     <section>
@@ -768,12 +717,11 @@ private static KafkaConsumer&lt;String, String&gt; createKafkaConsumer() {
                     </section>
                     <section>
                         <pre><code class="hljs" data-trim>
-private static void manualCommit(KafkaConsumer&lt;String, String&gt; consumer) {
-    // TODO 2_4
+private def manualCommit(consumer: KafkaConsumer[String, String]) {
     try {
-        consumer.commitSync();
-    } catch (CommitFailedException e) {
-        e.printStackTrace();
+        consumer.commitSync()
+    } catch {
+        case e: CommitFailedException => e.printStackTrace()
     }
 }</code></pre>
                     </section>
@@ -796,7 +744,7 @@ private static void manualCommit(KafkaConsumer&lt;String, String&gt; consumer) {
                     </section>
                     <section>
                         <p>Dans cette classe/lambda vous devrez implémenter la méthode <i>onComplete</i> qui possède deux arguments : </p>
-                        <p><i>Map&lt;TopicPartition, OffsetAndMetadata&gt; offsets</i> qui renvoie des informations sur les offsets par partition en cas de succès</p>
+                        <p><i>Map[TopicPartition, OffsetAndMetadata] offsets</i> qui renvoie des informations sur les offsets par partition en cas de succès</p>
                         <p><i>Exception e</i> qui sera non null en cas d'erreur</p>
                     </section>
                     <section>
@@ -811,22 +759,23 @@ private static void manualCommit(KafkaConsumer&lt;String, String&gt; consumer) {
                     </section>
                     <section>
                         <pre><code class="hljs" data-trim>
-private static void manualAsynchronousCommit(KafkaConsumer&lt;String, String&gt; consumer) {
-    // TODO 2_5
-    consumer.commitAsync((offsets, exception) -> {
-        if (exception != null) {
-            exception.printStackTrace();
-        } else if (offsets != null) {
-            offsets.entrySet().stream().forEach(
-                entry -> {
-                    TopicPartition topicPartition = entry.getKey();
-                    OffsetAndMetadata offsetAndMetadata = entry.getValue();
-                    System.out.printf("commited offset %d for partition %d of topic %s%n",
-                    offsetAndMetadata.offset(), topicPartition.partition(), topicPartition.topic());
-                }
-            );
+private def manualAsynchronousCommit(consumer: KafkaConsumer[String, String]) {
+    import scala.collection.JavaConversions._
+    consumer.commitAsync {
+        new OffsetCommitCallback {
+            override def onComplete(offsets: util.Map[TopicPartition, OffsetAndMetadata], exception: Exception) {
+                if (exception != null) {
+                    exception.printStackTrace()
+                } else if (offsets != null) offsets.entrySet().foreach(
+                    entry => {
+                        val topicPartition = entry.getKey
+                        val offsetAndMetadata = entry.getValue
+                        println(s"commited offset ${offsetAndMetadata.offset} for partition ${topicPartition.partition} of topic ${topicPartition.topic}")
+                    }
+                )
+            }
         }
-    });
+    }
 }</code></pre>
                     </section>
                 </section>
@@ -839,7 +788,7 @@ private static void manualAsynchronousCommit(KafkaConsumer&lt;String, String&gt;
                         <p>Il est possible de passer un argument supplémentaire à la méthode <i>subscribe</i> du consumer pour executer du code lorqu'un consumer se voit assigner ou revoquer une partition</p>
                     </section>
                     <section>
-                        <p>Créer une classe statique privée dans <i>JavaConsumer</i> implémentant l'interface <i>org.apache.kafka.clients.consumer.ConsumerRebalanceListener</i></p>
+                        <p>Créer une classe statique privée dans <i>ScalaConsumer</i> implémentant l'interface <i>org.apache.kafka.clients.consumer.ConsumerRebalanceListener</i></p>
                         <p>Dans la méthode <i>onPartitionsAssigned</i> afficher dans la console les partitions assignées</p>
                         <p>Dans la méthode <i>onPartitionsRevoked</i> afficher dans la console les partitions revoquées</p>
                     </section>
@@ -854,22 +803,14 @@ private static void manualAsynchronousCommit(KafkaConsumer&lt;String, String&gt;
                     </section>
                     <section>
                         <pre><code class="hljs" data-trim>
-// TODO 2_6
-private static class HandleRebalance implements ConsumerRebalanceListener {
-    public void onPartitionsAssigned(Collection&lt;TopicPartition&gt; partitions) {
-        partitions.stream().forEach(
-            topicPartition ->
-            System.out.printf("Assigned partition %d of topic %s%n",
-            topicPartition.partition(), topicPartition.topic())
-        );
+class HandleRebalance extends ConsumerRebalanceListener {
+    import scala.collection.JavaConversions._
+    override def onPartitionsAssigned(partitions: util.Collection[TopicPartition]) {
+        partitions.foreach(topicPartition => println(s"Assigned partition ${topicPartition.partition} of topic ${topicPartition.topic}"))
     }
 
-    public void onPartitionsRevoked(Collection&lt;TopicPartition&gt; partitions) {
-        partitions.stream().forEach(
-            topicPartition ->
-            System.out.printf("Revoked partition %d of topic %s%n",
-            topicPartition.partition(), topicPartition.topic())
-        );
+    override def onPartitionsRevoked(partitions: util.Collection[TopicPartition]) {
+        partitions.foreach(topicPartition => println(s"Revoked partition ${topicPartition.partition} of topic ${topicPartition.topic}"))
     }
 }</code></pre>
                     </section>
@@ -947,7 +888,7 @@ Runtime.getRuntime().addShutdownHook(new Thread() {
                         <p>Nous allons coder un consommateur Kafka en mode batch à l'aide de la nouvelle API introduite avec la version 0.9.</p>
                     </section>
                     <section>
-                        <p>Cette fois, nous allons travailler sur la classe <i>fr.xebia.devoxx.kafka.BatchConsumer</i>.</p>
+                        <p>Cette fois, nous allons travailler sur la classe <i>fr.xebia.devoxx.kafka.ScalaBatchConsumer</i>.</p>
                     </section>
                     <section>
                         <p>Créer un job avec ce consommateur depuis Kafka consiste à :
@@ -960,7 +901,7 @@ Runtime.getRuntime().addShutdownHook(new Thread() {
                         </p>
                     </section>
                     <section>
-                        <p>Pour se faire, vous allez devoir suivre les 4 TODOs de la classes <i>fr.xebia.devoxx.kafka.BatchConsumer</i> en suivant les étapes décrites si dessous.</p>
+                        <p>Pour se faire, vous allez devoir suivre les 4 TODOs de la classes <i>fr.xebia.devoxx.kafka.ScalaBatchConsumer</i> en suivant les étapes décrites si dessous.</p>
                         <p>Cette classe est une classe exécutable que vous pouvez lancer depuis Eclipse ou IntelliJ.</p>
                     </section>
                 </section>
@@ -970,7 +911,7 @@ Runtime.getRuntime().addShutdownHook(new Thread() {
                     <h3>Instanciation d'un KafkaConsumer</h3>
                     <section></section>
                     <section>
-                        <p>Instancier un <i>org.apache.kafka.clients.consumer.KafkaConsumer&lt;K, V&gt;</i> dans la méthode <i>createKafkaConsumer</i>.</p>
+                        <p>Instancier un <i>org.apache.kafka.clients.consumer.KafkaConsumer[K, V]</i> dans la méthode <i>createKafkaConsumer</i>.</p>
                     </section>
                     <section>
                         <p>Pas besoin de commiter les offsets ici : mettre la valeur de la property enable.auto.commit à false</p>
@@ -983,17 +924,16 @@ Runtime.getRuntime().addShutdownHook(new Thread() {
                     </section>
                     <section>
                         <pre><code class="hljs" data-trim>
-private static KafkaConsumer&lt;String, String&gt; createKafkaConsumer() {
-    // TODO 3_1
-    Map&lt;String, Object&gt; props = new HashMap<>();
-    // required properties
-
-    props.put("bootstrap.servers", "localhost:9092,localhost:9093");
-    props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-    props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-    props.put("enable.auto.commit", "false");
-
-    return new KafkaConsumer<>(props);
+private def createKafkaConsumer(): KafkaConsumer[String, String] = {
+    import scala.collection.JavaConversions._
+    val props = Map(
+        "bootstrap.servers" -> "localhost:9092,localhost:9093",
+        "key.deserializer" -> "org.apache.kafka.common.serialization.StringDeserializer",
+        "value.deserializer" -> "org.apache.kafka.common.serialization.StringDeserializer",
+        "enable.auto.commit" -> "false",
+        "group.id" -> "batch"
+    )
+    new KafkaConsumer[String, String](props)
 }</code></pre>
                     </section>
                 </section>
@@ -1020,15 +960,12 @@ private static KafkaConsumer&lt;String, String&gt; createKafkaConsumer() {
                     </section>
                     <section>
                         <pre><code class="hljs" data-trim>
-private static void assignPartitions(KafkaConsumer&lt;String, String&gt; consumer) {
-    // TODO 3_2
-    List&lt;PartitionInfo&gt; partitionInfos = consumer.partitionsFor("devoxx");
-    List&lt;TopicPartition&gt; topicPartitions =  partitionInfos.stream()
-    .map(partitionInfo -> new TopicPartition("devoxx", partitionInfo.partition()))
-    .collect(Collectors.toList());
-
-    System.out.println(topicPartitions);
-    consumer.assign(topicPartitions);
+private def assignPartitions(consumer: KafkaConsumer[String, String]) {
+    import scala.collection.JavaConversions._
+    val partitionInfos = consumer.partitionsFor("devoxx")
+    val topicPartitions = partitionInfos.map(partitionInfo => new TopicPartition("devoxx", partitionInfo.partition()))
+    System.out.println(topicPartitions)
+    consumer.assign(topicPartitions)
 }</code></pre>
                     </section>
                 </section>
@@ -1049,9 +986,8 @@ private static void assignPartitions(KafkaConsumer&lt;String, String&gt; consume
                     </section>
                     <section>
                         <pre><code class="hljs" data-trim>
-private static void seek(KafkaConsumer&lt;String, String&gt; consumer) {
-    // TODO 3_3
-    consumer.seekToBeginning();
+private def seek(consumer: KafkaConsumer[String, String]) {
+    consumer.seekToBeginning()
 }</code></pre>
                     </section>
                 </section>
@@ -1068,20 +1004,19 @@ private static void seek(KafkaConsumer&lt;String, String&gt; consumer) {
                     </section>
                     <section>
                         <pre><code class="hljs" data-trim>
-private static void process(KafkaConsumer&lt;String, String&gt; consumer) {
-    // TODO 3_4
-    ConsumerRecords&lt;String, String&gt; records = consumer.poll(1000);
-    while (!records.isEmpty()) {
-        for (ConsumerRecord&lt;String, String&gt; record : records) {
-            System.out.println(String.format("topic = %s, partition: %d, offset: %d: %s", record.topic(), record.partition(),
-            record.offset(), record.value()));
+private def process(consumer: KafkaConsumer[String, String]) {
+    import scala.collection.JavaConversions._
+    var records = consumer.poll(1000)
+    while (!records.isEmpty) {
+        for (record <- records) {
+            println(s"topic = ${record.topic}, partition: ${record.partition}, offset: ${record.offset}: ${record.value}")
         }
-        records = consumer.poll(1000);
+        records = consumer.poll(1000)
     }
 }</code></pre>
                     </section>
                     <section>
-                        <p>Lancer la class <i>BatchConsumer</i></p>
+                        <p>Lancer la class <i>ScalaBatchConsumer</i></p>
                         <p>Constater que c'est tout de même assez rapide, même dans des conditions de développement</p>
                     </section>
                 </section>
@@ -1205,7 +1140,7 @@ config/connect-file-source.properties config/connect-file-sink.properties</code>
                     </section>
                     <section>
                         <p>Commençons par créer un stream processing très simple qui va légerement modifier nos messages provenant de notre base de données crée dans l'exercice précedent</p>
-                        <p>Cette fois, nous allons travailler sur la classe <i>fr.xebia.devoxx.kafka.SimpleKafkaStream</i>.</p>
+                        <p>Cette fois, nous allons travailler sur la classe <i>fr.xebia.devoxx.kafka.ScalaKStream</i>.</p>
                     </section>
                 </section>
 
@@ -1221,7 +1156,7 @@ config/connect-file-source.properties config/connect-file-sink.properties</code>
                         <h4>Solution</h4>
                     </section>
                     <section>
-                        <pre><code class="hljs" data-trim>KStreamBuilder kStreamBuilder = new KStreamBuilder();</code></pre>
+                        <pre><code class="hljs" data-trim>val kStreamBuilder: KStreamBuilder = new KStreamBuilder()</code></pre>
                     </section>
                 </section>
 
@@ -1237,7 +1172,7 @@ config/connect-file-source.properties config/connect-file-sink.properties</code>
                         <h4>Solution</h4>
                     </section>
                     <section>
-                        <pre><code class="hljs" data-trim>KStream&lt;String, String&gt; source = kStreamBuilder.stream("devoxx-connect");</code></pre>
+                        <pre><code class="hljs" data-trim>val source: KStream[String, String] = kStreamBuilder.stream("devoxx-connect")</code></pre>
                     </section>
                 </section>
 
@@ -1256,7 +1191,11 @@ config/connect-file-source.properties config/connect-file-sink.properties</code>
                         <h4>Solution</h4>
                     </section>
                     <section>
-                        <pre><code class="hljs" data-trim>KStream&lt;String, String&gt; sink = source.map((key, value) -> new KeyValue<>(key, "STREAM : " + value));</code></pre>
+                        <pre><code class="hljs" data-trim>val sink: KStream[String, String] = source.map {
+    new KeyValueMapper[String, String, KeyValue[String, String]] {
+        override def apply(key: String, value: String): KeyValue[String, String] = new KeyValue[String, String](key, "STREAM : " + value)
+    }
+}</code></pre>
                     </section>
                 </section>
 
@@ -1304,16 +1243,19 @@ config/connect-file-source.properties config/connect-file-sink.properties</code>
                         <h4>Solution</h4>
                     </section>
                     <section>
-                        <pre><code class="hljs" data-trim>Properties props = new Properties();
-        props.put(StreamsConfig.JOB_ID_CONFIG, "streams-wordcount");
-        props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092,localhost:9093");
-        props.put(StreamsConfig.ZOOKEEPER_CONNECT_CONFIG, "localhost:2181");
-        props.put(StreamsConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        props.put(StreamsConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        props.put(StreamsConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(StreamsConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+                        <pre><code class="hljs" data-trim>val props: Properties = new Properties
+props.put(StreamsConfig.JOB_ID_CONFIG, "streams")
+props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092,localhost:9093")
+props.put(StreamsConfig.ZOOKEEPER_CONNECT_CONFIG, "localhost:2181")
+props.put(StreamsConfig.KEY_SERIALIZER_CLASS_CONFIG, classOf[StringSerializer])
+props.put(StreamsConfig.VALUE_SERIALIZER_CLASS_CONFIG, classOf[StringSerializer])
+props.put(StreamsConfig.KEY_DESERIALIZER_CLASS_CONFIG, classOf[StringDeserializer])
+props.put(StreamsConfig.VALUE_DESERIALIZER_CLASS_CONFIG, classOf[StringDeserializer])
 
-        KafkaStreams kafkaStreams = new KafkaStreams(kStreamBuilder, props);</code></pre>
+// setting offset reset to earliest so that we can re-run the demo code with the same pre-loaded data
+props.put(StreamsConfig.AUTO_OFFSET_RESET_CONFIG, "latest")
+
+val kafkaStreams: KafkaStreams = new KafkaStreams(kStreamBuilder, props)</code></pre>
                     </section>
                 </section>
 
@@ -1331,14 +1273,14 @@ config/connect-file-source.properties config/connect-file-sink.properties</code>
                         <h4>Solution</h4>
                     </section>
                     <section>
-                        <pre><code class="hljs" data-trim>kafkaStreams.start();</code></pre>
+                        <pre><code class="hljs" data-trim>kafkaStreams.start()</code></pre>
                     </section>
                     <section>
                         <p>modifier la configuration du fichier config/connect-file-sink.properties pour écouter les messages du topic devoxx-streams-out</p>
                         <p>relancer le service KafkaConnect</p>
                     </section>
                     <section>
-                        <p>Lancer la classe <i>SimpleKafkaStream</i></p>
+                        <p>Lancer la classe <i>ScalaKStream</i></p>
                     </section>
                     <section>
                         <p>Ecrire des lignes dans le fichier best-db-ever.txt</p>
@@ -1377,18 +1319,20 @@ config/connect-file-source.properties config/connect-file-sink.properties</code>
                         <h4>Indice</h4>
                     </section>
                     <section>
-                        <p>Instancier la classe org.apache.spark.streaming.api.java.JavaStreamingContext</p>
+                        <p>Instancier la classe org.apache.spark.streaming.kafka.StreamingContext</p>
                     </section>
                     <section>
                         <h4>Solution</h4>
                     </section>
                     <section>
                         <pre><code class="hljs" data-trim>
-SparkConf conf = new SparkConf()
-    .setMaster("local[2]")
-    .setAppName("streaming-client");
+                            def createStreamContext(): StreamingContext = {
+                            val conf = new SparkConf()
+                            .setMaster("local[2]")
+                            .setAppName("kafka-spark-streaming")
 
-return new JavaStreamingContext(conf, Durations.seconds(5));
+                            new StreamingContext(new SparkContext(conf), Seconds(5))
+                            }
                         </code></pre>
                     </section>
                 </section>
@@ -1405,10 +1349,12 @@ return new JavaStreamingContext(conf, Durations.seconds(5));
                     </section>
                     <section>
                         <pre><code class="hljs" data-trim>
-Map&lt;String, Integer> topics = new HashMap<>();
-topics.put("handsonkafka", 4);
-
-return KafkaUtils.createStream(context, "localhost:2181", "streaming-client", topics);
+                            def createStream(context: StreamingContext): InputDStream[(String, String)] = {
+                            val zookeeper = "localhost:2181"
+                            val clientName = "streaming-client"
+                            val topics = Map("handsonkafka" -> 4)
+                            KafkaUtils.createStream(context, zookeeper, clientName, topics)
+                            }
                         </code></pre>
                     </section>
                 </section>
@@ -1439,11 +1385,12 @@ return KafkaUtils.createStream(context, "localhost:2181", "streaming-client", to
                     </section>
                     <section>
                         <pre><code class="hljs" data-trim>
-stream.map(v1 -> extractValueFromRecord(v1._2()))
-    .foreachRDD(JavaConsumerStream::displayAvg);
+                            stream.map(_._2)
+                            .map(extractValueFromRecord)
+                            .foreachRDD(rdd => displayAvg(rdd))
 
-context.start();
-context.awaitTermination();
+                            streamingContext.start()
+                            streamingContext.awaitTermination()
                         </code></pre>
                     </section>
                 </section>
@@ -1479,9 +1426,6 @@ context.awaitTermination();
                 <section>
                     <h1>Merci</h1>
                 </section>
-
-                
-                
             </div>
 		</div>
 

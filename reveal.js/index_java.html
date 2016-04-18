@@ -632,7 +632,7 @@ private static KafkaConsumer&lt;String, String&gt; createKafkaConsumer() {
                         <p>Récupérer les messages du topic devoxx à l'aide la méthode <i>poll</i>.</p>
                     </section>
                     <section>
-                        <p>poll() retourne une collection de <i>ConsumerRecord</i>.</p>
+                        <p>poll() retourne un Iterable de <i>ConsumerRecord</i>.</p>
                         <p>Chaque record contient le topic du message, la partition d'où provient le message, l'offset du message dans cette partition, et bien sur la clé et la valeur du message.</p>
                         <p>Itérer sur ces messages pour les afficher à l'aide de la méthode <i>display</i> codée pour vous.</p>
                     </section>
@@ -657,9 +657,7 @@ public static void main(String[] args) {
     try {
         while (true) {
             ConsumerRecords&lt;String, String&gt; consumerRecords = consumer.poll(100);
-            for (ConsumerRecord&lt;String, String&gt; consumerRecord : consumerRecords) {
-                display(consumerRecord);
-            }
+            consumerRecords.forEach(JavaConsumer::display);
         }
     } finally {
         consumer.close();
@@ -728,9 +726,6 @@ private static KafkaConsumer&lt;String, String&gt; createKafkaConsumer() {
     // latest : automatically reset the offset to the latest offset
     // none : throw exception to the consumer if no previous offset is found for the consumer's group
     props.put("auto.offset.reset", "latest");
-
-    // Will be used by the brokers to identify messages sent from the client. It is used in logging, metrics and for quotas.
-    props.put("client.id", "");
 
     return new KafkaConsumer<>(props);
 }</code></pre>
@@ -947,7 +942,7 @@ Runtime.getRuntime().addShutdownHook(new Thread() {
                         <p>Nous allons coder un consommateur Kafka en mode batch à l'aide de la nouvelle API introduite avec la version 0.9.</p>
                     </section>
                     <section>
-                        <p>Cette fois, nous allons travailler sur la classe <i>fr.xebia.devoxx.kafka.BatchConsumer</i>.</p>
+                        <p>Cette fois, nous allons travailler sur la classe <i>fr.xebia.devoxx.kafka.JavaBatchConsumer</i>.</p>
                     </section>
                     <section>
                         <p>Créer un job avec ce consommateur depuis Kafka consiste à :
@@ -960,7 +955,7 @@ Runtime.getRuntime().addShutdownHook(new Thread() {
                         </p>
                     </section>
                     <section>
-                        <p>Pour se faire, vous allez devoir suivre les 4 TODOs de la classes <i>fr.xebia.devoxx.kafka.BatchConsumer</i> en suivant les étapes décrites si dessous.</p>
+                        <p>Pour se faire, vous allez devoir suivre les 4 TODOs de la classes <i>fr.xebia.devoxx.kafka.JavaBatchConsumer</i> en suivant les étapes décrites si dessous.</p>
                         <p>Cette classe est une classe exécutable que vous pouvez lancer depuis Eclipse ou IntelliJ.</p>
                     </section>
                 </section>
@@ -1061,6 +1056,9 @@ private static void seek(KafkaConsumer&lt;String, String&gt; consumer) {
                     <h3>Consommer les messages</h3>
                     <section></section>
                     <section>
+                        <p>Dans la méthode <i>process</i> consommer les messages à l'aide de la méthode poll et afficher le contenu du message dans la console (+ tout autres informations que vous jugerez pertinentes : topic, partition, offset...)</p>
+                    </section>
+                    <section>
                         <h4>Implémentez la section 3_4</h4>
                     </section>
                     <section>
@@ -1073,15 +1071,14 @@ private static void process(KafkaConsumer&lt;String, String&gt; consumer) {
     ConsumerRecords&lt;String, String&gt; records = consumer.poll(1000);
     while (!records.isEmpty()) {
         for (ConsumerRecord&lt;String, String&gt; record : records) {
-            System.out.println(String.format("topic = %s, partition: %d, offset: %d: %s", record.topic(), record.partition(),
-            record.offset(), record.value()));
+            System.out.printf("topic = %s, partition: %d, offset: %d: %s%n", record.topic(), record.partition(), record.offset(), record.value());
         }
         records = consumer.poll(1000);
     }
 }</code></pre>
                     </section>
                     <section>
-                        <p>Lancer la class <i>BatchConsumer</i></p>
+                        <p>Lancer la class <i>JavaBatchConsumer</i></p>
                         <p>Constater que c'est tout de même assez rapide, même dans des conditions de développement</p>
                     </section>
                 </section>
@@ -1205,7 +1202,7 @@ config/connect-file-source.properties config/connect-file-sink.properties</code>
                     </section>
                     <section>
                         <p>Commençons par créer un stream processing très simple qui va légerement modifier nos messages provenant de notre base de données crée dans l'exercice précedent</p>
-                        <p>Cette fois, nous allons travailler sur la classe <i>fr.xebia.devoxx.kafka.SimpleKafkaStream</i>.</p>
+                        <p>Cette fois, nous allons travailler sur la classe <i>fr.xebia.devoxx.kafka.JavaKStream</i>.</p>
                     </section>
                 </section>
 
@@ -1338,11 +1335,11 @@ config/connect-file-source.properties config/connect-file-sink.properties</code>
                         <p>relancer le service KafkaConnect</p>
                     </section>
                     <section>
-                        <p>Lancer la classe <i>SimpleKafkaStream</i></p>
+                        <p>Lancer la classe <i>JavaKStream</i></p>
                     </section>
                     <section>
                         <p>Ecrire des lignes dans le fichier best-db-ever.txt</p>
-                        <p>Elles sont automatiquement répliquées dans le fichier second-best-db-ever.txt avec une petite transformation apportée par notr KafkaStream!</p>
+                        <p>Elles sont automatiquement répliquées dans le fichier second-best-db-ever.txt avec une petite transformation apportée par notre KafkaStream!</p>
                     </section>
                 </section>
 

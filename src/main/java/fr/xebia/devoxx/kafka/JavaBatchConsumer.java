@@ -1,15 +1,7 @@
 package fr.xebia.devoxx.kafka;
 
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.commons.lang.NotImplementedException;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.common.PartitionInfo;
-import org.apache.kafka.common.TopicPartition;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class JavaBatchConsumer {
 
@@ -25,45 +17,22 @@ public class JavaBatchConsumer {
 
     private static KafkaConsumer<String, String> createKafkaConsumer() {
         // TODO 3_1
-        Map<String, Object> props = new HashMap<>();
-
-        props.put("bootstrap.servers", "localhost:9092,localhost:9093");
-        props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        props.put("enable.auto.commit", "false");
-        props.put("group.id", "batch");
-
-        return new KafkaConsumer<>(props);
+        throw new NotImplementedException();
     }
 
     private static void assignPartitions(KafkaConsumer<String, String> consumer) {
         // TODO 3_2
-        List<PartitionInfo> partitionInfos = consumer.partitionsFor("devoxx");
-        List<TopicPartition> topicPartitions =  partitionInfos.stream()
-                .map(partitionInfo -> new TopicPartition("devoxx", partitionInfo.partition()))
-                .collect(Collectors.toList());
-
-        System.out.println(topicPartitions);
-        consumer.assign(topicPartitions);
+        throw new NotImplementedException();
     }
 
     private static void seek(KafkaConsumer<String, String> consumer) {
         // TODO 3_3
-        consumer.seekToBeginning();
+        throw new NotImplementedException();
     }
-
-
 
     private static void process(KafkaConsumer<String, String> consumer) {
         // TODO 3_4
-        ConsumerRecords<String, String> records = consumer.poll(1000);
-        while (!records.isEmpty()) {
-            for (ConsumerRecord<String, String> record : records) {
-                System.out.println(String.format("topic = %s, partition: %d, offset: %d: %s", record.topic(), record.partition(),
-                        record.offset(), record.value()));
-            }
-            records = consumer.poll(1000);
-        }
+        throw new NotImplementedException();
     }
 
 

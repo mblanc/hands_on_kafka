@@ -17,37 +17,23 @@ object ScalaBatchConsumer {
 
   private def createKafkaConsumer(): KafkaConsumer[String, String] = {
     import scala.collection.JavaConversions._
-    val props = Map(
-      "bootstrap.servers" -> "localhost:9092,localhost:9093",
-      "key.deserializer" -> "org.apache.kafka.common.serialization.StringDeserializer",
-      "value.deserializer" -> "org.apache.kafka.common.serialization.StringDeserializer",
-      "enable.auto.commit" -> "false",
-      "group.id" -> "batch"
-    )
-    new KafkaConsumer[String, String](props)
+    // TODO 3_1
+    ???
   }
 
   private def assignPartitions(consumer: KafkaConsumer[String, String]) {
-    import scala.collection.JavaConversions._
-    val partitionInfos = consumer.partitionsFor("devoxx")
-    val topicPartitions = partitionInfos.map(partitionInfo => new TopicPartition("devoxx", partitionInfo.partition()))
-    System.out.println(topicPartitions)
-    consumer.assign(topicPartitions)
+    // TODO 3_2
+    ???
   }
 
   private def seek(consumer: KafkaConsumer[String, String]) {
-    consumer.seekToBeginning()
+    // TODO 3_3
+    ???
   }
 
   private def process(consumer: KafkaConsumer[String, String]) {
-    import scala.collection.JavaConversions._
-    var records = consumer.poll(1000)
-    while (!records.isEmpty) {
-      for (record <- records) {
-        println(s"topic = ${record.topic}, partition: ${record.partition}, offset: ${record.offset}: ${record.value}")
-      }
-      records = consumer.poll(1000)
-    }
+    // TODO 3_4
+    ???
   }
 
 }

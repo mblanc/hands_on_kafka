@@ -18,9 +18,7 @@ object ScalaSparkStreaming {
     val stream = createStream(streamingContext)
 
     // TODO Step 6_3
-    stream.map(_._2)
-      .map(extractValueFromRecord)
-      .foreachRDD(rdd => displayAvg(rdd))
+    ???
 
     streamingContext.start()
     streamingContext.awaitTermination()
@@ -29,20 +27,12 @@ object ScalaSparkStreaming {
 
   def createStreamContext(): StreamingContext = {
     // TODO Step 6_1
-    val conf = new SparkConf()
-      .setMaster("local[2]")
-      .setAppName("kafka-spark-streaming")
-
-    new StreamingContext(new SparkContext(conf), Seconds(5))
+    ???
   }
 
   def createStream(context: StreamingContext): InputDStream[(String, String)] = {
     // TODO Step 6_2
-    val zookeeper = "localhost:2181"
-    val clientName = "streaming-client"
-    val topics = Map("handsonkafka" -> 4)
-
-    KafkaUtils.createStream(context, zookeeper, clientName, topics)
+    ???
   }
 
   def extractValueFromRecord(line: String): Double = {

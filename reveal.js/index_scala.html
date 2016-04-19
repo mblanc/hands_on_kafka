@@ -1286,6 +1286,22 @@ val kafkaStreams: KafkaStreams = new KafkaStreams(kStreamBuilder, props)</code><
                         <p>Ecrire des lignes dans le fichier best-db-ever.txt</p>
                         <p>Elles sont automatiquement répliquées dans le fichier second-best-db-ever.txt avec une petite transformation apportée par notr KafkaStream!</p>
                     </section>
+                    <section>
+                        <p>
+                            Kafka Streams vous offre donc :
+                        </p>
+                        <ul>
+                            <li>Un processing message par message ("temps réel" pas micro-batch)</li>
+                            <li>Un DSL facile d'utilisation pour transformer vos messages</li>
+                            <li>Un mode distribué avec tolérance à la panne</li>
+                        </ul>
+                        <p>Sans avoir à sortir l'artillerie lourde (Storm, Spark Streaming...)</p>
+                        <p>Vous pouvez parfaitement intégrer un job Kafka Streams au sein d'une application.</p>
+                    </section>
+                    <section>
+                        <p>Il également possible de faire des aggregats sur un flux de données ou même des jointures sur plusieurs flux de données.</p>
+                        <p>Kafka Streams utilise pour cela l'abstraction KTable</p>
+                    </section>
                 </section>
 
                 <section>
@@ -1303,6 +1319,10 @@ val kafkaStreams: KafkaStreams = new KafkaStreams(kStreamBuilder, props)</code><
                     <section>
                         <p>Développons un traitement qui analysera la charge moyenne de CPU des 5
                             dernières secondes.</p>
+                    </section>
+                    <section>
+                        <p>Dans Maven/SBT décommenter l'import des dependences de Spark</p>
+                        <p>Décommentez les méthodes de la classe ScalaSparkStreaming</p>
                     </section>
                 </section>
 

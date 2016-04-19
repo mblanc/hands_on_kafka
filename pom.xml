@@ -54,16 +54,16 @@
             <artifactId>kafka-streams</artifactId>
             <version>${kafka.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming_${scala.dep.version}</artifactId>
-            <version>${spark.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming-kafka_${scala.dep.version}</artifactId>
-            <version>${spark.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.spark</groupId>-->
+            <!--<artifactId>spark-streaming_${scala.dep.version}</artifactId>-->
+            <!--<version>${spark.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.spark</groupId>-->
+            <!--<artifactId>spark-streaming-kafka_${scala.dep.version}</artifactId>-->
+            <!--<version>${spark.version}</version>-->
+        <!--</dependency>-->
     </dependencies>
     <build>
         <plugins>

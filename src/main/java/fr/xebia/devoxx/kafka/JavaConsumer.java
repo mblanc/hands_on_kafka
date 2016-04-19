@@ -1,8 +1,10 @@
 package fr.xebia.devoxx.kafka;
 
-import org.apache.commons.lang.NotImplementedException;
-import org.apache.kafka.clients.consumer.*;
+import org.apache.kafka.clients.consumer.ConsumerRebalanceListener;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.TopicPartition;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Collection;
 

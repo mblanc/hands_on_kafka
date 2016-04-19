@@ -1,10 +1,11 @@
 package fr.xebia.devoxx.kafka;
 
-import org.apache.commons.lang.NotImplementedException;
+
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.lang.management.ManagementFactory;
 import java.util.Calendar;

@@ -1,7 +1,7 @@
 package fr.xebia.devoxx.kafka;
 
-import org.apache.commons.lang.NotImplementedException;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class JavaBatchConsumer {
 

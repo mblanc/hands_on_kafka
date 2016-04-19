@@ -1355,7 +1355,12 @@ config/connect-file-source.properties config/connect-file-sink.properties</code>
                     </section>
                     <section>
                         <p>Il également possible de faire des aggregats sur un flux de données ou même des jointures sur plusieurs flux de données.</p>
-                        <p>Kafka Streams utilise pour cela l'abstraction KTable</p>
+                        <p>Kafka Streams utilise pour cela l'abstraction KTable qui représente un changelog stream</p>
+                    </section>
+                    <section>
+                        <p>Vous pouvez tenter de jouer avec cet API en observant la classe WordCountJob</p>
+                        <p>Bonus : Essayer de compter le nombre d'occurences des mots du livre la Métamorphose de Franz Kafka (src/main/resources/metamorphosis.txt)</p>
+                        <p>Cette fois-ci pas d'aide...:)</p>
                     </section>
                 </section>
 

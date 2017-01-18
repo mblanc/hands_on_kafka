@@ -16,29 +16,29 @@ public class WordCountJob {
     public static void main(String[] args) throws Exception {
         KStreamBuilder builder = new KStreamBuilder();
 
-        final Serializer<String> stringSerializer = new StringSerializer();
-        final Deserializer<String> stringDeserializer = new StringDeserializer();
-        final Serializer<Long> longSerializer = new LongSerializer();
-        final Deserializer<Long> longDeserializer = new LongDeserializer();
+        final Serde<String> stringSerde = Serdes.String();
+        final Serde<Long> longSerde = Serdes.Long();
 
-        KStream<String, String> source = builder.stream("devoxx-wordcount");
+        KStream<String, String> source = builder.stream("streams-file-input");
 
         KTable<String, Long> wordCounts = source
-                .flatMapValues(value -> Arrays.asList(value.toLowerCase().split("\\W+")))
-                .map((key, value) -> new KeyValue<>(value, value))
-                .countByKey(stringSerializer, longSerializer, stringDeserializer, longDeserializer, "Counts");
+                .flatMapValues(value -> {
+                    System.out.println(value);
+                    return Arrays.asList(value.toLowerCase().split("\\W+"));
+                })
+                .groupByKey()
+                .count("Counts");
 
-        wordCounts.to("devoxx-wordcount-out");
+        wordCounts.toStream().to(stringSerde, longSerde, "streams-wordcount-output");
 
 
         Properties props = new Properties();
-        props.put(StreamsConfig.JOB_ID_CONFIG, "devoxx-wordcount");
+        props.put(StreamsConfig.APPLICATION_ID_CONFIG, "devoxx-wordcount");
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         props.put(StreamsConfig.ZOOKEEPER_CONNECT_CONFIG, "localhost:2181");
-        props.put(StreamsConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        props.put(StreamsConfig.VALUE_SERIALIZER_CLASS_CONFIG, LongSerializer.class);
-        props.put(StreamsConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(StreamsConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(StreamsConfig.KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
+        props.put(StreamsConfig.VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
+        props.put(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, 10 * 1000);
         KafkaStreams streams = new KafkaStreams(builder, props);
         streams.start();
         System.out.println("START");
